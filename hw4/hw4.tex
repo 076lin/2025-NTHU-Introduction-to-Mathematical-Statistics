@@ -1,0 +1,290 @@
+\documentclass{article}
+\usepackage{xeCJK, amsmath, amssymb, geometry}
+\setCJKmainfont{標楷體}
+\geometry{a4paper, margin=2.5cm}
+
+\title{數統導論作業四}
+\author{111020003 林群佑}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{3.1.12}
+\subsection*{(a)}
+\begin{align*}
+M_{X_2, \ldots, X_{k-1}}(t_2, \ldots, t_{k-1}) 
+&= M_{X_1, \ldots, X_{k-1}}(0, t_2, \ldots, t_{k-1}) \\
+&= (p_1 e^0 + p_2 e^{t_2} + \cdots + p_{k-1} e^{t_{k-1}} + p_k)^n \\
+&= (p_1 + p_k + p_2 e^{t_2} + \cdots + p_{k-1} e^{t_{k-1}})^n
+\end{align*}
+
+\subsection*{(b)}
+
+By mgf of (a) we can know that
+pmf of $X_2, \ldots, X_{k-1}$ is
+\[ 
+P(X_2=x_2, \ldots, X_{k-1}=x_{k-1}) = 
+\frac{n!}{x_2! \cdots x_{k-1}! (n - S)!} p_2^{x_2} \cdots p_{k-1}^{x_{k-1}} (p_1+p_k)^{n-s}
+\]
+where $S = \sum_{i=2}^{k-1} x_i \leq n$。
+
+\subsection*{(c)}
+By definition
+\begin{align*}
+P(X_1=x_1 | X_2=x_2, \ldots, X_{k-1}=x_{k-1})
+&= \frac{P(X_1=x_1, X_2=x_2, \ldots, X_{k-1}=x_{k-1})}{P(X_2=x_2, \ldots, X_{k-1}=x_{k-1})}\\
+&=\frac{\frac{n!}{x_1! x_2! \cdots x_{k-1}! x_k!} p_1^{x_1} p_2^{x_2} \cdots p_{k-1}^{x_{k-1}} p_k^{x_k}}
+{\frac{n!}{x_2! \cdots x_{k-1}! (x_1+x_k)!} p_2^{x_2} \cdots p_{k-1}^{x_{k-1}} (p_1+p_k)^{(x_1+x_k)}}\\
+&=\frac{(x_1 + x_k)!}{x_1! x_k!}\frac{p_1^{x_1}p_k^{x_k}}{(p_1+p_k)^{(x_1+x_k)}}\\
+&=\frac{(n-S)!}{x_1! (n-S-x_1)!}\left(\frac{p_1}{p_1+p_k}\right)^{x_1}
+\left(\frac{p_k}{p_1+p_k}\right)^{n-S-x_1}
+\end{align*}
+where \(S = \sum_{i=2}^{k-1} x_i\)
+\subsection*{(d)}
+By (c) we can know that \(X_1 | X_2=x_2, \ldots, X_{k-1}=x_{k-1}
+\sim \text{Binomial}(n-\sum_{i=2}^{k-1}x_i \, , \frac{p_1}{p_1+p_k})\)
+
+\noindent
+Therefore,
+\[
+E(X_1 | X_2 = x_2, \ldots, X_{k-1}) = 
+\left( n - \sum_{i=2}^{k-1} x_i \right) \left( \frac{p_1}{p_1+p_k} \right)
+\]
+\section*{3.1.17}
+First we compute mgf of \(\text{Geometric}(p)\) only consider fail times before success.
+\begin{align*}
+\mathbb{E}[e^{tx}]&=\sum_{x=0}^{\infty} e^{tx}\left(1-p\right)^x p\\
+&=p\sum_{x=0}^{\infty}\left[e^t\left(1-p\right)\right]^x\\
+&=\frac{p}{1-\left(1-p\right)e^t}
+\end{align*}
+\noindent
+Because it need converge that \(t < -\ln(1-p) \)
+
+\noindent
+Then in fact that we can seen \(\text{Negative Binomial}(r, p)\) as \(r\) times independent \(\text{Geometric}(p)\).
+
+\noindent
+Therefore,
+\begin{align*}
+M_{NB(r,p)}(t) &= \prod_{i=1}^{r}M_{Geo(p)}(t)\\
+&=\left[\frac{p}{1-\left(1-p\right)e^t}\right]^r\\
+&=p^r\left[1-\left(1-p\right)e^t\right]^{-r}
+\end{align*}
+\noindent
+It also need satisfy that \(t < -\ln(1-p) \)
+
+\noindent
+Expection of Negative Binomial is:
+\begin{align*}
+\mathbb{E}[X] &= \frac{d}{dt}M(0)\\
+&= \frac{d}{dt} \, p^r\left[1-\left(1-p\right)e^t\right]^{-r} \\
+&= p^r \cdot (-r) \cdot \left[1-\left(1-p\right)e^t\right]^{-(r+1)} \cdot [-(1-p)e^t]\\
+&= p^r \cdot (-r) \cdot \left[1-\left(1-p\right)e^0\right]^{-(r+1)} \cdot [-(1-p)e^0]\\
+&= p^r \cdot r \cdot p^{-(r+1)} \cdot (1-p)\\
+&= r\frac{(1-p)}{p}
+\end{align*}
+\noindent
+Variance of Negative Binomial is:
+
+\begin{align*}
+Var(X) &= \frac{d^2}{dt^2} \, \ln\left[M(0)\right]\\
+&= \frac{d^2}{dt^2} \, \left[r\ln(p) - r \ln(1-(1-p)e^t)\right]\\
+&= \frac{d}{dt} \, \left[ \frac{r(1-p)e^t}{1-(1-p)e^t}\right]\\
+&= \frac{r(1-p)e^t[1-(1-p)e^t]-r(1-p)e^t[-(1-p)e^t]}{[1-(1-p)e^t]^2}\\
+&= \frac{r(1-p)e^0[1-(1-p)e^0]+r(1-p)e^0[(1-p)e^0]}{[1-(1-p)e^0]^2}\\
+&= r\frac{(1-p)}{p^2}
+\end{align*}
+\section*{3.1.27}
+By definition we have:
+\begin{align*}
+    P(X \geq k+j \mid X \geq k) &= \frac{P(X \geq k+j \cap X \geq k)}{P(X \geq k)}\\
+    &= \frac{P(X \geq k+j)}{P(X \geq k)}\\
+    &= \frac{\sum_{i=k+j}^{\infty} (1-p)^{i}p}{\sum_{m=k}^{\infty} (1-p)^{m}p}\\
+    &= \frac{(1-p)^{k+j}}{(1-p)^{k}}\\
+    &= (1-p)^j\\
+    &=\sum_{i=j}^{\infty} (1-p)^{i}p\\
+    &= P(X \geq j)
+\end{align*}
+\section*{3.2.17}
+Because \(X_1,X_2\) are independent and \(Y = X_1 + X_2\). Then we have 
+\(M_Y(t) = M_{X_1}(t)M_{X_2}(t)\).
+\begin{align*}
+M_{X_2}(t) &= \frac{M_Y(t)}{M_{X_1}(t)}\\
+&= \frac{exp[\mu (e^t-1)]}{exp[\mu_1 (e^t-1)]}\\
+&= exp[(\mu - \mu_1)(e^t-1)]
+\end{align*}
+
+\noindent
+By mgf of \(X_2\) and \(\mu > \mu_1\). We can identify that \(X_2 \sim Possion(\mu - \mu_1)\).
+\section*{3.3.16}
+\begin{align*}
+P(Y<y) &= P(-2\ln(X)<y)\\
+&=P(\ln(X)>-\frac{y}{2})\\
+&=P(X>e^{-y/2})\\
+&=\int_{e^{-y/2}}^{1} 1 \, dx\\
+&=1-e^{-y/2}
+\end{align*}
+\begin{align*}
+\text{Then when } X=0, Y= \infty \text{ and } X=1, Y=0
+\end{align*}
+Therefore, we have cdf of Y:
+\begin{align*}
+F_Y(y)=
+\begin{cases}
+1-e^{-y/2} \text{  if  } y \in (0, \infty)\\
+0 \text{  elsewhere}
+\end{cases}
+\end{align*}
+\begin{align*}
+\frac{d}{dy}F_Y(y)&=\frac{d}{dy}1-e^{-y/2}\\
+&=\frac{1}{2}e^{-y/2}
+\end{align*}
+The pdf of Y:
+\begin{align*}
+f_Y(y)=
+\begin{cases}
+\frac{1}{2}e^{-y/2} \text{  if  } y \in (0, \infty)\\
+0 \text{  elsewhere}
+\end{cases}
+\end{align*}
+\section*{3.3.24}
+\subsection*{(a)}
+Because \(X_1,X_2\) are independent.
+\begin{align*}
+M_Y(t)&=\mathbb{E}[e^{tY}]\\
+&=\mathbb{E}[e^{t(2X_1+6X_2)}]\\
+&=\mathbb{E}[e^{2tX_1}]\mathbb{E}[e^{6tX_2}]\\
+&=M_{X_1}(2t)M_{X_2}(6t)\\
+&=[1-3(2t)]^{-3} \cdot [1-1(6t)]^{-5}\\
+&=(1-6t)^{-8}
+\end{align*}
+\subsection*{(b)}
+By mgf of Y,we can know that \(Y \sim Gamma(\alpha = 8,\beta = 6)\).
+\section*{3.3.25}
+\subsection*{(a)}
+\begin{align*}
+P(X>x+y \mid X>x)&=\frac{P(X > x+y \cap X>x)}{P(X>x)}\\
+&=\frac{P(X > x+y)}{P(X>x)}\\
+&=\frac{1-F_X(x+y)}{1-F_X(x)}\\
+&=\frac{e^{-\lambda(x+y)}}{e^{-\lambda x}}\\
+&=e^{-\lambda y}\\
+&=1-F_X(y)\\
+&=P(X>y)
+\end{align*}
+\subsection*{(b)}
+Let \(g(y) = 1 - F_Y(y) = P(Y > y)\).The memoryless property states:
+\[
+P(Y > x + y \mid Y > x) = P(Y > y)
+\]
+Using the definition of conditional probability:
+\[
+\frac{P(Y > x + y \cap Y > x)}{P(Y > x)} = 
+\frac{P(Y > x + y)}{P(Y > x)} =
+P(Y > y)
+\]
+Substituting $g(y)$:
+\[
+\frac{g(x + y)}{g(x)} = g(y) \implies g(x + y) = g(x)g(y)
+\]
+This is Cauchy's functional equation. Since $Y$ is a continuous random variable, 
+$F_Y(y)$ is continuous, and thus $g(y)$ must be continuous. 
+The only continuous solutions for $y > 0$ are of the form $g(y) = c^y$ 
+for some constant $c$.\\
+We are given $0 < F_Y(y) < 1$ for $y > 0$, 
+which implies $0 < g(y) < 1$ for $y > 0$.This restricts the constant $c$ to 
+$0 < c < 1$.\\
+We can define a positive constant $\lambda = -\ln(c)$ (which is positive since $0 < c < 1$).
+Then $c = e^{-\lambda}$.\\
+So, $g(y) = c^y = (e^{-\lambda})^y = e^{-\lambda y}$.\\
+Finally, we substitute back $g(y) = 1 - F_Y(y)$:
+$$1 - F_Y(y) = e^{-\lambda y}$$
+$$F_Y(y) = 1 - e^{-\lambda y}, \quad \text{for } y > 0$$
+This is the cdf of an exponential distribution with parameter $\lambda$. 
+We also verify $F_Y(0) = 1 - e^0 = 0$, which matches the given condition.
+\section*{3.4.29}
+Because $X_1$ and $X_2$ are independent with normal distributions $N(6, 1)$ and
+$N(7, 1)$.\\
+Therefore, we have:
+\[
+X_1-X_2 \sim N(6-7,1+1) \sim N(-1,2)
+\]
+Then,
+\begin{align*}
+P(X_1>X_2) &= P(X_1-X_2 >0)\\
+&=1-\Phi(\frac{0-(-1)}{\sqrt{2}})\\
+&=\Phi(-\frac{1}{\sqrt{2}})\\
+&\approx 0.23975
+\end{align*}
+\section*{3.5.7}
+Because X and Y have a bivariate normal distribution, we have $Y|X=x$:
+\[
+Y|X=x \sim N(\mu_2 - \rho (x - \mu_1), \sigma_2^2(1-\rho^2))
+\sim N(10 - \rho (x - 5), 25(1-\rho^2))
+\]
+Then,
+\begin{align*}
+P(4<Y<16 \mid X=5)&=\Phi\left(\frac{16-\rho (5 - 5) -10}{\sqrt{25(1-\rho^2)}}\right)-
+\Phi\left(\frac{4-\rho (5 - 5) -10}{\sqrt{25(1-\rho^2)}}\right)\\
+&=\Phi\left(\frac{6}{5\sqrt{1-\rho^2}}\right)-
+\Phi\left(\frac{-6}{5\sqrt{1-\rho^2}}\right)\\
+&=2\Phi\left(\frac{6}{5\sqrt{1-\rho^2}}\right) -1
+\end{align*}
+And we know that
+$$P(4<Y<16 \mid X=5) =  0.954 \approx 2\Phi(2)-1$$
+Therefore
+\[
+\frac{6}{5\sqrt{1-\rho^2}}\approx 2 \Rightarrow \rho \approx 0.8
+\]
+\section*{3.5.12}
+Because X and Y have a bivariate normal distribution with parameters $\mu_1 =\mu_2 =0$, 
+$\sigma_1^2 = \sigma_2^2 = 1$,
+and correlation coefficient $\rho$. 
+\[
+Z = aX+bY \sim N(a\mu_1+b\mu_2,a^2\sigma_1^2+b^2\sigma_2^2+2ab\rho\sigma_1\sigma_2)
+\sim N(0,a^2+b^2+2ab\rho)
+\]
+\section*{3.6.11}
+A random variable $F$ follows an F-distribution with $r_1$ and $r_2$ degrees of freedom, 
+denoted $F \sim F(r_1, r_2)$, if it can be written as the ratio of two independent chi-square 
+($\chi^2$) random variables, each divided by its respective degrees of freedom:
+\[
+F = \frac{U_1 / r_1}{U_2 / r_2}
+\]
+Where: $U_1 \sim \chi^2_{r_1}\, , \,  U_2 \sim \chi^2_{r_2}\, , \, U_1$ and $U_2$ are independent.
+Then
+\[
+T^2 = \frac{W^2 / 1}{V / r}
+\]
+\begin{enumerate}
+    \item The Numerator ($U_1 / r_1$):
+    \begin{itemize}
+        \item Let $U_1 = W^2$ and $r_1 = 1$.
+        \item We are given $W \sim N(0, 1)$.
+        \item By definition, the square of a standard normal random variable is a chi-square 
+        random variable with 1 degree of freedom.
+        \item Therefore, $U_1 = W^2 \sim \chi^2_1$.
+        \item This matches the requirement for the numerator, with $r_1 = 1$.
+    \end{itemize}
+    \item The Denominator ($U_2 / r_2$):
+    \begin{itemize}
+        \item Let $U_2 = V$ and $r_2 = r$.
+        \item We are given $V \sim \chi^2_r$.
+        \item This matches the requirement for the denominator, with $r_2 = r$.
+    \end{itemize}
+    \item Independence:
+    \begin{itemize}
+        \item We need $U_1$ and $U_2$ to be independent.
+        \item $U_1 = W^2$ and $U_2 = V$.
+        \item We are given that $W$ and $V$ are independent. 
+        Since $W^2$ is a function of $W$, it is also independent of $V$.
+        \item Therefore, $U_1$ and $U_2$ are independent.
+    \end{itemize}
+\end{enumerate}
+We have successfully shown that $T^2$ can be expressed as:
+$$T^2 = \frac{W^2 / 1}{V / r} = \frac{U_1 / r_1}{U_2 / r_2}$$
+Where: $U_1 = W^2 \sim \chi^2_1$ (so $r_1 = 1$) , $U_2 = V \sim \chi^2_r$ (so $r_2 = r$),
+$U_1$ and $U_2$ are independent.
+This is the exact definition of an F-distribution with $r_1 = 1$ and $r_2 = r$.
+Thus, $T^2 \sim F(1, r)$.
+\end{document}

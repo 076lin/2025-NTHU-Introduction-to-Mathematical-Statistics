@@ -1,0 +1,453 @@
+\documentclass{article}
+\usepackage{xeCJK, amsmath, amssymb, geometry, graphicx, float}
+\setCJKmainfont{標楷體}
+\geometry{a4paper, margin=2.5cm}
+
+\title{數統導論作業六}
+\author{111020003 林群佑}
+\date{}
+\begin{document}
+\maketitle
+\section*{4.2.8}
+By CLT we have :
+\[
+\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)
+\]
+Then, by Z table we have :
+\[
+0.954 \approx P\left(-2 < Z < 2 \right)
+\]
+Therefore, we can compute that:
+\[
+\frac{1}{2} \approx 2\frac{\sqrt{10}}{\sqrt{n}} \implies n \approx 160
+\]
+\section*{4.2.10}
+\subsection*{(1) Find the constant c}
+Let $Y = \bar{X} - X_{n+1}$. Since $\bar{X}$ and $X_{n+1}$ are independent:
+$$
+\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right), \quad X_{n+1} \sim N(\mu, \sigma^2)
+$$
+The expectation and variance of $Y$ are:
+$$
+E[Y] = \mu - \mu = 0
+$$
+$$
+Var(Y) = Var(\bar{X}) + Var(X_{n+1}) = \frac{\sigma^2}{n} + \sigma^2 = 
+\sigma^2\left(\frac{n+1}{n}\right)
+$$
+Standardizing $Y$ gives a standard normal variable $Z$:
+$$
+Z = \frac{(\bar{X} - X_{n+1}) - 0}{\sqrt{\sigma^2\left(\frac{n+1}{n}\right)}} = 
+\frac{\bar{X} - X_{n+1}}{\sigma\sqrt{\frac{n+1}{n}}} \sim N(0,1)
+$$
+We define the T-statistic with $n-1$ degrees of freedom as $T = \frac{Z}{\sqrt{S^2/\sigma^2}}$:
+$$
+T = \frac{\frac{\bar{X} - X_{n+1}}{\sigma\sqrt{\frac{n+1}{n}}}}{S/\sigma} = 
+\frac{\bar{X} - X_{n+1}}{S\sqrt{\frac{n+1}{n}}} \sim t(n-1)
+$$
+The problem requires the form $c(\bar{X} - X_{n+1})/S$. Comparing the coefficients:
+$$
+c = \frac{1}{\sqrt{\frac{n+1}{n}}} = \sqrt{\frac{n}{n+1}}
+$$
+\subsection*{(2) find $k$ for the 80 precentage prediction interval}
+We want to find $k$ such that:
+$$
+P(\bar{X} - kS < X_{n+1} < \bar{X} + kS) = 0.80 \implies
+P\left( -k < \frac{\bar{X} - X_{n+1} }{S} < k \right) = 0.80
+$$
+From part (1) we know that $T$ follows a t-distribution with 
+$n-1$ degrees of freedom:
+$$
+T = \frac{\bar{X} - X_{n+1}}{S\sqrt{\frac{n+1}{n}}} \sim t(n-1)
+$$
+Since:
+\[
+0.8 = P\left(-t_{0.1,7} < \sqrt{\frac{8}{9}} \frac{\bar{X} - X_9}{S} < t_{0.1,7}\right)
+\]
+By T-table we have :
+$$
+t_{0.10, 7} \approx 1.415 
+$$
+Therefore :
+\[
+    k = t_{0.10, 7} \times \sqrt{\frac{n+1}{n}} \approx
+    1.415 \times \sqrt{\frac{9}{8}} \approx 1.5
+\]
+\section*{4.2.18}
+\subsection*{(a)}
+By question, we have:
+\[
+P\left(a < \frac{(n-1)S^2}{\sigma^2} < b\right) = 0.95 \text{ and }
+P\left(\frac{(n-1)S^2}{\sigma^2} < b\right) = 0.975 \implies
+P\left(\frac{(n-1)S^2}{\sigma^2} \le a\right) = 0.025
+\]
+Then chi-square is define on $[0,\infty)$, so $a>0$. Because we have $a>0,b>0$ :
+\[
+    P\left(a < \frac{(n-1)S^2}{\sigma^2} < b\right) = 
+    P\left(\frac{1}{b} < \frac{\sigma^2}{(n-1)S^2} < \frac{1}{a}\right) = 
+    P\left(\frac{(n-1)S^2}{b} < \sigma^2 < \frac{(n-1)S^2}{a}\right) = 0.95
+\]
+\subsection*{(b)}
+Because $ (n-1)S^2 / \sigma^2 \sim \chi^2(n-1)$ :
+\[
+a = \chi^2_{8, 0.025} \approx 2.180 , \, b = \chi^2_{8, 0.975} \approx 17.534
+\]
+From part (a) we know that :
+\[
+P\left(\frac{(n-1)S^2}{b} < \sigma^2 < \frac{(n-1)S^2}{a}\right) = 0.95
+\]
+Therefore, we have confidence interval for $\sigma^2$ :
+\[
+\left(\frac{(n-1)S^2}{b},\frac{(n-1)S^2}{a}\right) \approx
+\left(\frac{8 \times 7.93}{17.534},\frac{8 \times 7.93}{2.180}\right) \approx
+\left(3.62,29.1\right)
+\]
+\subsection*{(c)}
+If the true population mean $\mu$ is known, we do not need to estimate it using 
+the sample mean $\bar{X}$.
+
+\begin{enumerate}
+    \item Change in Pivotal Quantity:
+    Instead of using the sample variance $S^2 = \frac{1}{n-1}\sum(X_i - \bar{X})^2$, 
+    we use the quantity $\sum(X_i - \mu)^2$.
+    The new pivotal quantity is:
+    \[
+    \frac{\sum_{i=1}^{n} (X_i - \mu)^2}{\sigma^2}
+    \]
+    \item Change in Distribution:
+    Because we are using the true parameter $\mu$ rather than an estimate $\bar{X}$, 
+    we do not lose a degree of freedom. 
+    This quantity follows a Chi-square distribution with $n$ degrees of freedom.
+    \[
+    \frac{\sum (X_i - \mu)^2}{\sigma^2} \sim \chi^2_n
+    \]
+    \item Modified Confidence Interval Formula:
+    The confidence interval becomes:
+    \[
+    \left( \frac{\sum_{i=1}^{n} (X_i - \mu)^2}{b}, 
+    \frac{\sum_{i=1}^{n} (X_i - \mu)^2}{a} \right)
+    \]
+    where $a$ and $b$ are the critical values from the $\chi^2_n$ distribution
+\end{enumerate}
+\section*{4.2.22}
+We use CLT to estimate confidence interval for $p_1 - p_2$ :
+\[
+\hat{p_1} = \frac{y_1}{n_1} = \frac{50}{100} = 0.5, \,
+\hat{p_2} = \frac{y_2}{n_2} = \frac{40}{100} = 0.4 \implies
+\hat{p_1} - \hat{p_2} = 0.1
+\]
+\[
+S^2 = Var\left(\hat{p_1} - \hat{p_2}\right) = 
+\frac{n_1\hat{p_1}(1-\hat{p_1})}{n_1^2} + 
+\frac{n_2\hat{p_2}(1-\hat{p_2})}{n_2^2} =
+\frac{0.5\times0.5}{100} + \frac{0.4\times0.6}{100}
+=0.0049
+\]
+\[
+\implies S = \sqrt{0.0049} = 0.07
+\]
+Therefore, approximate 90 percentage confidence interval for $p_1 - p_2$ is :
+\[
+\left(\hat{p_1} - \hat{p_2} - Z_{0.05}\times S ,
+\hat{p_1} - \hat{p_2} + Z_{0.05}\times S \right) \approx
+\left(0.1 - 1.645 \times 0.07, 0.1 + 1.645 \times 0.07\right) \approx
+(-0.015, 0.215)
+\]
+The approximate 90 percentage confidence interval for $p_1 - p_2$ is:
+\[
+    (-0.015, 0.215)
+\]
+\section*{4.2.27}
+\subsection*{(a)}
+By definition we know that:
+\begin{enumerate}
+    \item Samples $X$ from $N(\mu_1, \sigma_1^2)$ its standardized 
+    variance follow a chi-squared distribution:
+    $$V = \frac{(n-1)S_1^2}{\sigma_1^2} \sim \chi^2(n-1)$$
+    \item Samples $Y$ from $N(\mu_2, \sigma_2^2)$ its standardized 
+    variance follow a chi-squared distribution:
+    $$U = \frac{(m-1)S_2^2}{\sigma_2^2} \sim \chi^2(m-1)$$
+    \item Since $X$ and $Y$ are independent, $U$ and $V$ are also independent.
+\end{enumerate}
+By definition of problem $F$ is :
+$$
+F = \frac{\frac{(m-1)S_2^2}{\sigma_2^2} / (m-1)}
+{\frac{(n-1)S_1^2}{\sigma_1^2} / (n-1)} = 
+\frac{S_2^2/\sigma_2^2}{S_1^2/\sigma_1^2}
+$$
+Therefore, we know that $F$ fits the definition of F-distribution with 
+numerator degrees of freedom $m-1$ and denominator degrees of freedom $n-1$.
+That is :
+\[
+F \sim F(m-1,n-1)
+\]
+\subsection*{(b)}
+By question, we have:
+\[
+P\left(a < F < b\right) = 0.95 \text{ and }
+P\left(F < b\right) = 0.975 \implies
+P\left(F \le a\right) = 0.025
+\]
+Therefore:
+\[
+a = F_{0.025}(m-1,n-1), \, b = F_{0.975}(m-1,n-1)
+\]
+\subsection*{(c)}
+\[
+0.95 = 
+P\left(a < F < b\right) = P\left(a < \frac{S_2^2\sigma_1^2}{S_1^2\sigma_2^2} < b\right)
+\]
+Then $S_1^2 > 0, S_2^2 > 0 \implies S_2^2 / S_1^2 > 0$ we have:
+\[
+P\left(a < \frac{S_2^2\sigma_1^2}{S_1^2\sigma_2^2} < b\right) = 
+P\left(a < \frac{S_2^2}{S_1^2} \cdot \frac{\sigma_1^2}{\sigma_2^2} < b\right) =
+P\left(a\frac{S_1^2}{S_2^2} < \frac{\sigma_1^2}{\sigma_2^2} < b\frac{S_1^2}{S_2^2}\right) = 
+0.95
+\]
+\section*{4.4.6}
+\subsection*{(a)}
+\[
+P\left(min(X_1,X_2,X_3) > m\right) = P\left(X_1 > m,X_2 > m,X_3 > m\right)
+\]
+Then, since $X_1, X_2, X_3$ are independent and by definition of median $P(X_i > m) = 1/2$ :
+\[
+P\left(min(X_1,X_2,X_3) > m\right) = 
+P\left(X_1 > m\right)P\left(X_2 > m\right)P\left(X_3 > m\right) = 
+\frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{8}
+\]
+\subsection*{(b)}
+First we compute cdf of $X$:
+\[
+F_X(x) = \int_{0}^{x} 2x dx = \left[x^2\right]^x_0 = x^2 , \, x \in (0,1)
+\]
+Then we have :
+\[
+\mathbb{E}[Y_2] = \int_{0}^{1} x \frac{3!}{1! \, 1!}(x^2)^1 2x (1-x^2)^1 dx =
+\int_{0}^{1} 12 x^4 - 12x^6 dx = \left[\frac{12}{5} x^5 - \frac{12}{7} x^7\right]^1_0 = 
+\frac{24}{35}
+\]
+\[
+\mathbb{E}[Y_2^2] = \int_{0}^{1} x^2 \frac{3!}{1! \, 1!}(x^2)^1 2x (1-x^2)^1 dx =
+\int_{0}^{1} 12 x^5 - 12x^7 dx = \left[2 x^6 - \frac{3}{2} x^8\right]^1_0 = 
+\frac{1}{2}
+\]
+\[
+Var\left(Y_2\right) = \mathbb{E}[Y_2^2] - \mathbb{E}[Y_2]^2 =
+\frac{1}{2} - \left(\frac{24}{35}\right)^2 = \frac{73}{2450}
+\]
+\[
+\mathbb{E}[Y_3] = \int_{0}^{1} x \frac{3!}{2! \, 0!}(x^2)^2 2x (1-x^2)^0 dx =
+\int_{0}^{1} 6 x^6 dx = \left[\frac{6}{7} x^7\right]^1_0 = 
+\frac{6}{7}
+\]
+\[
+\mathbb{E}[Y_3^2] = \int_{0}^{1} x^2 \frac{3!}{2! \, 0!}(x^2)^2 2x (1-x^2)^0 dx =
+\int_{0}^{1} 6 x^7 dx = \left[\frac{3}{4} x^8\right]^1_0 = 
+\frac{3}{4}
+\]
+\[
+Var\left(Y_3\right) = \mathbb{E}[Y_3^2] - \mathbb{E}[Y_3]^2 =
+\frac{3}{4} - \left(\frac{6}{7}\right)^2 = \frac{3}{196}
+\]
+\begin{align*}
+\mathbb{E}[Y_2 Y_3] &= 
+\int_0^1 \int_0^{y_3} (y_2 y_3) \cdot\frac{3!}{1!0!0!} 
+(y_2^2)^1 (y_3^2 - y_2^2)^0 (1-y_3^2)^0 (2y_2)(2y_3) \, dy_2 \, dy_3\\
+&= \int_0^1 \int_0^{y_3} (y_2 y_3) \cdot 24 y_2^3 y_3 \, dy_2 \, dy_3 \\
+&= 24 \int_0^1 y_3^2 \left[ \int_0^{y_3} y_2^4 \, dy_2 \right] dy_3 \\
+&= 24 \int_0^1 y_3^2 \left[ \frac{y_3^5}{5} \right]^{y_3}_0 dy_3 \\
+&= \frac{24}{5} \int_0^1 y_3^7 \, dy_3 \\
+&= \frac{24}{5} \cdot \frac{1}{8} = \frac{3}{5}
+\end{align*}
+Therefore, correlation between $Y_2$ and $Y_3$:
+\[
+\rho_{Y_2,Y_3} = \frac{\mathbb{E}[Y_2 Y_3] - \mathbb{E}[Y_2]\mathbb{E}[Y_3]}
+{\sigma_{Y_2}\sigma_{Y_3}} = 
+\frac{3/5 - 24/35 \cdot 6/7}{\sqrt{73/2450 \cdot 3/196}} = 
+\frac{2\sqrt{438}}{73} \approx 0.573
+\]
+\section*{4.4.12}
+First, we have $f(x) = 2x , \, x \in (0,1)$, so the joint pdf of Y is :
+\[
+f_{Y_1,Y_2,Y_3}(y_1,y_2,y_3) = 3! (2y_1)(2y_2)(2y_3) = 48y_1 y_2 y_3,
+\text{ where } 0<y_1<y_2<y_3<1
+\]
+Define $Z_1,Z_2,Z_3$ :
+\[
+Z_1 = \frac{Y_1}{Y_2} , \, Z_2 = \frac{Y_2}{Y_3} , \, Z_3 = Y_3 \implies
+Y_1 = Z_1Z_2Z_3, Y_2 = Z_2Z_3, Y_3 = Z_3
+\]
+Compute Jacobian matrix :
+\[
+J = \det \begin{pmatrix} 
+\frac{\partial y_1}{\partial z_1} & \frac{\partial y_1}{\partial z_2} & 
+\frac{\partial y_1}{\partial z_3} \\ 
+\frac{\partial y_2}{\partial z_1} & \frac{\partial y_2}{\partial z_2} & 
+\frac{\partial y_2}{\partial z_3} \\ 
+\frac{\partial y_3}{\partial z_1} & \frac{\partial y_3}{\partial z_2} & 
+\frac{\partial y_3}{\partial z_3}
+\end{pmatrix}  = 
+\det \begin{pmatrix} 
+    z_2 z_3 & z_1 z_3 & z_1 z_2 \\ 
+    0 & z_3 & z_2 \\ 
+    0 & 0 & 1 
+\end{pmatrix} = 
+z_2 z_3^2
+\]
+Then we have :
+\[
+f_{Z_1,Z_2,Z_3}(z_1,z_2,z_3) = 
+f_{Y_1,Y_2,Y_3}(z_1z_2z_3, \, z_2z_3, \, z_3) \cdot |J| = 
+48 z_1 z_2^3 z_3 ^5
+\]
+Find domain of $Z_1,Z_2,Z_3$ :
+\begin{align*}
+y_1 < y_2 , \text{ so }  \frac{Y_1}{Y_2} < 1 \implies 0 < Z_1 < 1\\
+y_2 < y_3 , \text{ so }  \frac{Y_2}{Y_3} < 1 \implies 0 < Z_2 < 1\\
+y_3 < 1 \implies 0 < Z_3 < 1
+\end{align*}
+Since domain of $Z_1,Z_2,Z_3$ are independent and it is obvious that joint pdf 
+can be factorize :
+$$ 
+f_{Z_1,Z_2,Z_3}(z_1,z_2,z_3) \propto (z_1) \cdot (z_2^3) \cdot (z_3^5) 
+$$
+By Factorization Theorem, $Z_1,Z_2,Z_3$ are mutually independent.
+\section*{4.4.15}
+\subsection*{(a)}
+The pdf of $N(0,\sigma^2)$ :
+\[
+f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-x^2 / 2\sigma^2}
+\]
+Then compute $\mathbb{E}[Y_1]$ :
+\begin{align*}
+\mathbb{E}[Y_1] &= \int_{-\infty}^{\infty} \int_{-\infty}^{y_2}
+y_1 \frac{2!}{2 \pi \sigma^2} e^{-(y_1^2+y_2^2) / 2\sigma^2} dy_1 \, dy_2\\
+&= \int_{-\infty}^{\infty} \frac{1}{\pi \sigma^2}e^{-y_2^2 / 2\sigma^2}
+\left(\int_{-\infty}^{y_2}y_1e^{-y_1^2 / 2\sigma^2} dy_1\right)dy_2\\
+&\text{Let } u = \frac{y_1^2}{2\sigma^2} \implies du = \frac{y_1}{\sigma^2} dy_1\\
+&=\int_{-\infty}^{\infty} \frac{1}{\pi \sigma^2}e^{-y_2^2 / 2\sigma^2}
+\left(\int_{\infty}^{y_2^2/2\sigma^2}y_1e^{-u} \frac{\sigma^2}{y_1}du\right)dy_2\\
+&=\int_{-\infty}^{\infty} \frac{1}{\pi}e^{-y_2^2 / 2\sigma^2}
+\left[-e^{-u}\right]_{\infty}^{y_2^2/2\sigma^2}dy_2\\
+&=\int_{-\infty}^{\infty} -\frac{1}{\pi}e^{-y_2^2 / \sigma^2} dy_2\\
+&= -\frac{2}{\pi}\int_{0}^{\infty} e^{-y_2^2 / \sigma^2} dy_2\\
+&\text{Let } v = \frac{y_2^2}{\sigma^2} \implies dv = \frac{2y_2}{\sigma^2} dy_2,\,
+y_2 = \sigma\sqrt{v} \, (\because y_2 \in (0, \infty))\\
+&= -\frac{2}{\pi}\int_{0}^{\infty} \frac{\sigma^2}{2\sigma\sqrt{v}} e^{-v} dv\\
+&= -\frac{\sigma}{\pi}\int_{0}^{\infty} v^{-1/2} e^{-v} dv\\
+&= -\frac{\sigma}{\pi} \Gamma\left(\frac{1}{2}\right)\\
+&= -\frac{\sigma}{\sqrt{\pi}}
+\end{align*}
+\subsection*{(b)}
+Consider the relationship between the original sample $\{X_1, X_2\}$ and the order statistics $\{Y_1, Y_2\}$. Since $\{Y_1, Y_2\}$ is just a permutation of $\{X_1, X_2\}$, their product remains the same:
+\[
+Y_1 Y_2 = X_1 X_2
+\]
+Since $X_1$ and $X_2$ are independent samples from $N(0, \sigma^2)$, we have:
+\[
+\mathbb{E}[Y_1 Y_2] = \mathbb{E}[X_1 X_2] = \mathbb{E}[X_1]\mathbb{E}[X_2] = 0 \cdot 0 = 0 
+\]
+Additionally, the $N(0,\sigma^2)$ distribution is symmetric about 0, which implies:
+\[
+\mathbb{E}[Y_2] = -\mathbb{E}[Y_1]
+\]
+Therefore, the covariance of $Y_1$ and $Y_2$ is:
+\[
+Cov(Y_1,Y_2) = \mathbb{E}[Y_1 Y_2] - \mathbb{E}[Y_1]\mathbb{E}[Y_2] = 
+0 - \left(-\frac{\sigma}{\sqrt{\pi}}\right)\left(\frac{\sigma}{\sqrt{\pi}}\right) = 
+\frac{\sigma^2}{\pi}
+\]
+\section*{4.4.19}
+Because $X$ and $Y$ independent :
+$$
+f_{X,Y}(x, y) = f_X(x) \cdot f_Y(y) = (2x)(3y^2) = 6xy^2, \quad 0 < x, y < 1
+$$
+Then :
+\begin{align*}
+f_{U,V}(u,v) &= f_{X,Y}(u,v)|J| + f_{X,Y}(v,u)|J| \\
+&= 6uv^2 \cdot 1 + 6vu^2 \cdot 1\\
+&= 6uv(u+v)
+\end{align*}
+$$
+\Rightarrow f_{U,V}(u,v) = 
+\begin{cases} 
+6uv(u+v), & 0 < u < v < 1 \\
+0, & \text{elsewhere}
+\end{cases}
+$$
+\section*{5.2.2}
+\begin{align*}
+F_{Y_1}(y) &= 1 - P(y < min(X_1,X_2,\dots X_n))\\
+&=1-\left(\int_{y}^{\infty} e^{-(x-\theta)} \, dx\right)^n\\
+&=1-\left(\left[-e^{-(x-\theta)}\right]_{y}^{\infty}\right)^n\\
+&=1-\left(e^{-(y-\theta)}\right)^n\\
+&=1-e^{-n(y-\theta)},\text{ where } y\in (\theta,\infty)
+\end{align*}
+Then :
+\begin{align*}
+F_{Z_n}(z) &= P(Z_n \le z)\\
+&= P(n(Y_1 - \theta) \le z)\\
+&= P(Y_1 \le \theta + \frac{z}{n})\\
+&= 1- e^{-z},\text{ where }z \in (0,\infty)
+\end{align*}
+\[
+\lim_{n \to \infty} F_{Z_n}(z) = \lim_{n \to \infty} 1- e^{-z} = 1- e^{-z} , \text{ where }
+z \in (0,\infty)
+\]
+Therefore we have :
+\[
+Z_n \xrightarrow{D} \text{Exponential} (1)
+\]
+\section*{5.3.3}
+\[
+\mathbb{E}[Y] = 72\times \frac{1}{3} = 24,\quad 
+Var(Y) = 72 \times \frac{1}{3} \times \frac{2}{3} = 16
+\]
+Then we need continuity correction :
+\begin{align*}
+P(22 \le Y \le 28) &\approx \Phi(\frac{28.5-24}{\sqrt{16}}) - \Phi(\frac{21.5-24}{\sqrt{16}})\\
+&\approx \Phi(1.125) - \Phi(-0.625)\\
+&\approx0.8697 - 0.2660 \\
+&\approx 0.6037
+\end{align*}
+\section*{6.1.11}
+\subsection*{(a)}
+The pdf of $N(\theta, \sigma^2)$ :
+\[
+\frac{1}{\sigma \sqrt{2 \pi}}e^{-(x-\theta)^2 / 2\sigma^2}
+\]
+The log likelihood function :
+\[
+l(\theta) = \sum_{i=1}^{n}
+\left[ - \frac{1}{2} \ln(2 \pi \sigma^2) -\frac{(x_i - \theta)^2}{2\sigma^2}\right]
+\]
+\[
+\frac{\partial l(\theta)}{\partial \theta} = 
+\sum_{i=1}^{n} \frac{x_i - \theta}{\sigma^2} = 0 \implies
+\theta = \frac{1}{n} \sum_{i=1}^{n} x_i
+\]
+\[
+\frac{\partial^2 l(\theta)}{\partial \theta^2} = -\frac{n}{\sigma^2} < 0 
+\]
+Therefore we have maximum likelihood function when $\theta = \hat{\theta}$ where :
+\[
+    \hat{\theta} = \frac{1}{n} \sum_{i=1}^{n} x_i =\bar{X}
+\]
+\subsection*{(b)}
+\begin{itemize}
+    \item \textbf{Case 1:}  $\bar{X} \ge 0$ : \\
+    By, (a) we had proved that when $\hat{\theta} = \bar{X}$ likelihood function has maximum.
+    \item \textbf{Case 2:} $\bar{X} < 0$ \\
+    The global maximum is at $\bar{X}$, which is outside the feasible region. 
+    For $\theta \ge 0$, we have $\theta > \bar{X}$. 
+    Since $l(\theta)$ is increasing for $\theta < \bar{X}$ and decreasing for $\theta > \bar{X}$, 
+    the function $l(\theta)$ is \textbf{strictly decreasing} on the interval $[0, \infty)$.
+    Therefore, the maximum on this interval occurs at the lower boundary:
+    \[ \hat{\theta}_{MLE} = 0 \]
+\end{itemize}
+Combining both cases, the restricted MLE is:
+$$
+\hat{\theta} = \max\{0, \bar{X}\}
+$$
+
+\end{document}

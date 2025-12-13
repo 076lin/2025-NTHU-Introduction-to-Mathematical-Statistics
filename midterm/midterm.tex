@@ -1,0 +1,840 @@
+\documentclass{article}
+\usepackage{xeCJK, amsmath, amssymb, geometry, color, bm, booktabs}
+\setCJKmainfont{標楷體}
+\geometry{a4paper, margin=2.5cm}
+
+\title{114數統導論期中考}
+\author{出題者:鄭又仁}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{注意事項}
+\subsection*{{\color{red}這份考卷是背出來的，考題只能說是考點一樣，但是題目敘述會有一定的差別!!!}}
+
+
+\section*{Problem 1}
+Let $N \sim \text{Poisson}(\lambda)$. Given $N=n$, we observe indicator variables $X_1, X_2, \dots, X_n$ where for each $i$,
+\[
+P(X_i=1)=p, \quad P(X_i=0)=1-p.
+\]
+Assume that, conditional on $N$, the variables $X_1, \dots, X_N$ are independent, and that $\{X_i\}$ is independent of $N$. Define
+\[
+S_N = \sum_{i=1}^{N} X_i,
+\]
+with the convention $S_0 = 0$.
+
+\begin{enumerate}
+    \item Derive the probability mass function $P(S_N = k)$.
+    \item Derive the moment generating function of $S_N$.
+\end{enumerate}
+
+\section*{Problem 2}
+Let $X \sim \text{Uniform}(0,1)$. Conditional on $X=x$, let $Y|X=x \sim \text{Uniform}(0,x)$.
+
+\begin{enumerate}
+    \item Compute $E[X+Y]$.
+    \item Compute $E[XY]$.
+\end{enumerate}
+
+\section*{Problem 3}
+\begin{enumerate}
+    \item Let $X \sim \text{Gamma}(\alpha, \beta)$ with shape $\alpha > 0$ and scale $\beta > 0$, so
+    \[
+    f_X(x) = \frac{1}{\Gamma(\alpha)\beta^{\alpha}} x^{\alpha-1} e^{-x/\beta}, \quad x > 0.
+    \]
+    For a constant $c > 0$, define $Y = cX$. Find the pdf of $Y$ and identify the distribution of $Y$.
+
+    \item Let $W$ follow a Weibull distribution with parameters $\alpha > 0$ and $\beta > 0$.
+    The cumulative distribution function (cdf) is given by:
+    \[
+    F_W(w) = 1 - \exp\left\{-\left(\frac{w}{\alpha}\right)^\beta\right\}, \quad w > 0.
+    \]
+    The probability density function (pdf) is therefore:
+    \[
+    f_W(w) = \frac{\beta}{\alpha} \left( \frac{w}{\alpha} \right)^{\beta-1} e^{-(w/\alpha)^\beta}, \quad w > 0.
+    \]
+    Define $V = (W/\alpha)^\beta$. Find the cdf of $V$ and identify its distribution.
+\end{enumerate}
+
+\section*{Problem 4}
+Let $X$ and $Y$ be random variables with the same mean $\mu$, and variances $\sigma_X^2$ and $\sigma_Y^2$, respectively. For $0 \le a \le 1$, define
+\[
+Z = aX + (1-a)Y.
+\]
+
+\begin{enumerate}
+    \item Find the value of $a$ that minimizes $\text{Var}(Z)$. Express your answer in terms of $\sigma_X^2$ and $\sigma_Y^2$.
+    \item Determine the condition under which
+    \[
+    \text{Var}\left(\frac{X+Y}{2}\right)
+    \]
+    is smaller than both $\text{Var}(X)$ and $\text{Var}(Y)$.
+\end{enumerate}
+
+\section*{Problem 5}
+Let $X, Y$ be random variables with $E[|XY|] < \infty$.
+
+\begin{enumerate}
+    \item Show that
+    \[
+    \text{Cov}(X, Y) = \text{Cov}(X, E[Y|X]).
+    \]
+    \item Show that $X$ and $Y - E[Y|X]$ are uncorrelated, i.e.,
+    \[
+    \text{Cov}(X, Y - E[Y|X]) = 0.
+    \]
+\end{enumerate}
+
+\section*{Problem 6}
+Suppose
+\[
+\begin{pmatrix} X_1 \\ X_2 \end{pmatrix} \sim N_2(\mu, \Sigma), \quad \mu = \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}, \quad \Sigma = \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{12} & \sigma_2^2 \end{pmatrix}.
+\]
+Define $Y = (Y_1, Y_2)^\top$ where
+\[
+Y_1 = X_1 + X_2, \quad Y_2 = X_1 - X_2.
+\]
+
+\begin{enumerate}
+    \item Determine the distribution of $Y$. Find its mean vector and covariance matrix.
+    \item Find the conditional distribution of $X_1 | X_2 = x_2$.
+    \item Find the condition under which $Y_1$ and $Y_2$ are independent.
+\end{enumerate}
+
+\section*{Problem 7}
+\begin{enumerate}
+    \item Let $X$ be a positive random variable with $P(X>0)=1$ and $E[X] < \infty$. Show that
+    \[
+    E[-\log X] \ge -\log E[X].
+    \]
+    \item Let $X_1, X_2, X_3$ be random variables with equal variance $\text{Var}(X_i) = \sigma^2$ for all $i$, and correlation coefficients
+    \[
+    \rho_{12} = 0.3, \quad \rho_{13} = 0.5, \quad \rho_{23} = 0.2.
+    \]
+    Define
+    \[
+    Y = X_1 + X_2, \quad Z = X_2 + X_3.
+    \]
+    Find the correlation coefficient $\rho_{YZ}$.
+
+    \item Let $X \sim \text{Uniform}(0,1)$. Denote its mean by $\mu_X$ and standard deviation by $\sigma_X$. For $0 < k < \sqrt{3}$, compute
+    \[
+    P(|X - \mu_X| \ge k\sigma_X).
+    \]
+
+    \item Using Chebyshev's inequality, obtain a upper bound for (c). Compare this bound with the exact probability found in part (c).
+\end{enumerate}
+
+\clearpage
+\begin{center}
+{\Huge \textbf{詳解}}
+\end{center}
+
+\section*{第一題}
+\textbf{技巧:} 先計算第二小題的 MGF ，再利用 MGF 的唯一性定理直接得出第一小題的 PMF。這樣可以避開繁瑣的組合級數求和。
+
+\subsection*{推導 $S_N$ 的 MGF}
+
+目標是計算 $M_{S_N}(t) = E[e^{t S_N}]$。
+利用 Double Expectation ，我們先對 $N$ 取條件期望：
+$$ M_{S_N}(t) = E[e^{t S_N}] = E_N \left[ E [e^{t S_N} \mid N] \right] $$
+
+\noindent
+\textbf{步驟一：計算內層條件期望}
+當給定 $N=n$ 時，$S_N$ 為 $n$ 個獨立 Bernoulli($p$) 隨機變數之和，即 $S_N \mid N=n \sim \text{Binomial}(n, p)$。
+二項分佈的 MGF 為 $(pe^t + 1-p)^n$，因此：
+$$ E[e^{t S_N} \mid N] = (pe^t + 1-p)^N $$
+
+\noindent
+\textbf{步驟二：計算外層期望}
+已知 $N \sim \text{Poisson}(\lambda)$，其 PMF 為 $P(N=n) = \frac{e^{-\lambda}\lambda^n}{n!}$。
+
+\begin{align*}
+M_{S_N}(t) &= E_N \left[ (pe^t + 1-p)^N \right] \\
+&= \sum_{n=0}^{\infty} (pe^t + 1-p)^n \cdot \frac{e^{-\lambda}\lambda^n}{n!} \\
+&= e^{-\lambda} \sum_{n=0}^{\infty} \frac{\left[ \lambda(pe^t + 1-p) \right]^n}{n!}
+\end{align*}
+利用泰勒展開式 $e^x = \sum_{k=0}^\infty \frac{x^k}{k!}$，我們將求和項合併為指數函數 :
+
+
+\begin{align*}
+M_{S_N}(t) &= e^{-\lambda} \cdot e^{\lambda(pe^t + 1-p)} \\
+&= e^{-\lambda + \lambda p e^t + \lambda - \lambda p} \\
+&= e^{\lambda p e^t - \lambda p} \\
+&= e^{\lambda p (e^t - 1)}
+\end{align*}
+
+\noindent
+\textbf{步驟二技巧性另解:如果你忘記泰勒展開式或者想不到時}\\
+\textbf{思路：} 與其只看 $S_N$，不如直接計算 $N$ 與 $S_N$ 的 joint MGF $M_{N, S_N}(t_1, t_2)$，最後再令 $t_1=0$ 即可還原出我們要的 $M_{S_N}(t_2)$。
+
+\noindent
+定義 joint MGF :
+$$ M_{N, S_N}(t_1, t_2) = E \left[ e^{t_1 N + t_2 S_N} \right] $$
+
+\noindent
+利用 Double Expectation (Conditioning on N) :
+\begin{align*}
+M_{N, S_N}(t_1, t_2) &= E_N \left[ E \left[ e^{t_1 N} e^{t_2 S_N} \mid N \right] \right] \\
+&= E_N \left[ e^{t_1 N} \cdot E \left[ e^{t_2 S_N} \mid N \right] \right]
+\end{align*}
+
+\noindent
+已知給定 $N$ 時，$S_N \sim \text{Binomial}(N, p)$，其 MGF 為 $(pe^{t_2} + 1 - p)^N$，代入上式：
+\begin{align*}
+M_{N, S_N}(t_1, t_2) &= E_N \left[ e^{t_1 N} \cdot (pe^{t_2} + 1 - p)^N \right] \\
+&= E_N \left[ \left( e^{t_1} (pe^{t_2} + 1 - p) \right)^N \right]
+\end{align*}
+
+\noindent
+\textbf{{\color{red}關鍵技巧：}}
+上式為 $E[A^N]$ 的形式，其中 $A = e^{t_1}(pe^{t_2} + 1 - p)$。
+直接利用恆等式 $A^N = e^{N \ln A}$ (換底)，將底數換成 $e$ :
+$$ E[A^N] = E[e^{N \ln A}] $$
+這正是 $N$ 的 MGF 定義式 $M_N(t)$，只是把參數 $t$ 換成了 $\ln A$。
+代入 Poisson MGF 公式 $e^{\lambda(e^t - 1)}$ :
+$$ M_N(\ln A) = e^{\lambda(e^{\ln A} - 1)} = e^{\lambda(A - 1)} $$
+
+\noindent
+將 $A$ 代回即得解。
+\noindent
+將 $A$ 代回：
+$$ M_{N, S_N}(t_1, t_2) = \exp \left\{ \lambda \left[ e^{t_1}(pe^{t_2} + 1 - p) - 1 \right] \right\} $$
+這就是 $N$ 與 $S_N$ 的 joint MGF。
+
+\noindent
+\textbf{最後一步：取 Marginal MGF}
+我們只需要 $S_N$ 的 MGF ，這對應於聯合 MGF 中 $N$ 的係數 $t_1 = 0$（相當於不考慮 $N$ 的影響）。
+令 $t_1 = 0$ (即 $e^{t_1} = 1$)，並設 $t_2 = t$ :
+
+\begin{align*}
+M_{S_N}(t) &= M_{N, S_N}(0, t) \\
+&= \exp \left\{ \lambda \left[ 1 \cdot (pe^t + 1 - p) - 1 \right] \right\} \\
+&= \exp \left\{ \lambda (pe^t - p) \right\} \\
+&= e^{\lambda p (e^t - 1)}
+\end{align*}
+
+\noindent
+\textbf{結論：} $S_N$ 的 MGF 為 $M_{S_N}(t) = e^{\lambda p (e^t - 1)}$。
+
+\subsection*{推導 PMF $P(S_N = k)$}
+
+根據 \textbf{MGF 唯一性定理}，若兩個隨機變數的 MGF 相同，則其分佈相同。
+
+\noindent
+觀察標準卜瓦松分佈 $Y \sim \text{Poisson}(\mu)$ 的 MGF 形式為：
+$$ M_Y(t) = e^{\mu(e^t - 1)} $$
+對照我們在第 2 小題算出的結果：
+$$ M_{S_N}(t) = e^{(\lambda p)(e^t - 1)} $$
+這兩者形式完全一致，其中參數 $\mu = \lambda p$。
+
+\noindent
+這意味著 $S_N$ 服從參數為 $\lambda p$ 的卜瓦松分佈：
+$$ S_N \sim \text{Poisson}(\lambda p) $$
+因此，其機率質量函數 (PMF) 直接寫出為：
+$$ P(S_N = k) = \frac{e^{-\lambda p} (\lambda p)^k}{k!}, \quad k = 0, 1, 2, \dots $$
+
+
+\noindent
+最後依照順序把答案填回去就可以了，不要填錯了!!!
+
+\section*{第一題另解(不推薦)}
+\noindent
+\textbf{步驟：}
+利用條件機率公式：
+$$ P(S_N=k) = \sum_{n=0}^\infty P(S_N=k \mid N=n) P(N=n) $$
+
+\noindent
+\textbf{\textcolor{red}{【關鍵技巧 1】總和下限要注意}} \\
+當 $N=n$ 時，$S_N$ 是一個二項分佈 $\text{Binomial}(n, p)$。
+注意：若實驗次數 $n$ 少於成功次數 $k$ ($n < k$)，機率為 0。因此求和從 $n=k$ 開始，而非 0。
+
+\begin{align*}
+P(S_N=k)
+&= \sum_{n=k}^\infty \underbrace{\binom{n}{k} p^k(1-p)^{n-k}}_{\text{Binomial PMF}} \cdot \underbrace{e^{-\lambda}\frac{\lambda^n}{n!}}_{\text{Poisson PMF}} \\
+&= \sum_{n=k}^\infty \frac{n!}{k!(n-k)!} p^k(1-p)^{n-k} e^{-\lambda}\frac{\lambda^n}{n!}
+\end{align*}
+
+\noindent
+\textbf{\textcolor{red}{【關鍵技巧 2】階乘消去與合併}} \\
+觀察式子：$n!$ 可以上下消掉。將與 $n$ 無關的項 ($e^{-\lambda}, p^k, k!$) 提到 sum 外面。
+且將 $\lambda^n$ 拆解為 $\lambda^k \cdot \lambda^{n-k}$ 以配合 $(1-p)^{n-k}$。
+
+\begin{align*}
+&= e^{-\lambda} \frac{p^k}{k!} \sum_{n=k}^\infty \frac{\lambda^n (1-p)^{n-k}}{(n-k)!} \\
+&= e^{-\lambda} \frac{p^k \lambda^k}{k!} \sum_{n=k}^\infty \frac{\lambda^{n-k} (1-p)^{n-k}}{(n-k)!} \\
+&= e^{-\lambda} \frac{(\lambda p)^k}{k!} \sum_{n=k}^\infty \frac{[\lambda(1-p)]^{n-k}}{(n-k)!}
+\end{align*}
+
+\noindent
+\textbf{\textcolor{red}{【關鍵技巧 3】變數變換還原指數函數}} \\
+令 $m = n - k$。當 $n=k$ 時，$m=0$；當 $n \to \infty$ 時，$m \to \infty$。
+利用泰勒展開式 $e^x = \sum_{m=0}^\infty \frac{x^m}{m!}$：
+
+\begin{align*}
+&= e^{-\lambda} \frac{(\lambda p)^k}{k!} \underbrace{\sum_{m=0}^\infty \frac{[\lambda(1-p)]^m}{m!}}_{e^{\lambda(1-p)}} \\
+&= e^{-\lambda} \frac{(\lambda p)^k}{k!} e^{\lambda(1-p)} \\
+&= \frac{(\lambda p)^k}{k!} e^{-\lambda + \lambda - \lambda p} \\
+&= \frac{(\lambda p)^k}{k!} e^{-\lambda p}
+\end{align*}
+
+\noindent
+\textbf{結論：} 這正是參數為 $\lambda p$ 的 Poisson PMF。故 $S_N \sim \text{Poisson}(\lambda p)$。
+MGF 自己算，有背直接帶數字。
+
+
+\hrulefill
+
+\section*{第二題}
+
+\subsection*{(1) 計算 $E[X+Y]$}
+
+根據期望值的線性性質與雙重期望值公式：
+\begin{align*}
+E[X+Y] &= E[X] + E[Y] \\
+&= E[X] + E_X\big[E[Y \mid X]\big] \\
+&= \int_0^1 x \, dx + \int_0^1 \int_0^x y \cdot \frac{1}{x} \, dy \, dx \\
+&= \left. \frac{1}{2}x^2 \right|_0^1 + \int_0^1 \left[ \frac{y^2}{2x} \right]_{y=0}^{y=x} \, dx \\
+&= \frac{1}{2} + \int_0^1 \frac{x^2}{2x} \, dx \\
+&= \frac{1}{2} + \int_0^1 \frac{x}{2} \, dx \\
+&= \frac{1}{2} + \left. \frac{x^2}{4} \right|_0^1 \\
+&= \frac{1}{2} + \frac{1}{4} = \boxed{\frac{3}{4}}
+\end{align*}
+
+\subsection*{(2) 計算 $E[XY]$}
+
+直接使用聯合機率密度函數 $f(x,y) = f_X(x)f_{Y|X}(y|x) = 1 \cdot \frac{1}{x}$ 進行雙重積分：
+\begin{align*}
+E[XY] &= \int_0^1 \int_0^x xy \cdot \frac{1}{x} \, dy \, dx \\
+&= \int_0^1 \int_0^x y \, dy \, dx \quad \text{($x$ 與 $\frac{1}{x}$ 相消)} \\
+&= \int_0^1 \left[ \frac{y^2}{2} \right]_{y=0}^{y=x} \, dx \\
+&= \int_0^1 \frac{x^2}{2} \, dx \\
+&= \left. \frac{x^3}{6} \right|_0^1 \\
+&= \boxed{\frac{1}{6}}
+\end{align*}
+
+\hrulefill
+
+\section*{第三題}
+\subsection*{(1) Gamma scaling} 
+如果 $X\sim \mathrm{Gamma}(\alpha,\beta)$ 而 $Y=cX \, ,\,  c>0$, 則
+\[
+f_Y(y)=|J| \cdot f_X\!\left(\frac{y}{c}\right) = 
+\bigg| \frac1c \bigg| \,f_X\!\left(\frac{y}{c}\right)
+=\frac{1}{\Gamma(\alpha)(c\beta)^\alpha}y^{\alpha-1}e^{-y/(c\beta)},\quad y>0,
+\]
+因此 $Y\sim \mathrm{Gamma}(\alpha,\,c\beta)$.
+
+\subsection*{(1) Gamma scaling 另解}
+已知 $X \sim \mathrm{Gamma}(\alpha, \beta)$。根據 Gamma 分布的性質，其 MGF 為：
+\[
+M_X(t) = E[e^{tX}] = (1 - \beta t)^{-\alpha}, \quad \text{其中 } t < \frac{1}{\beta}
+\]
+令 $Y = cX$（其中 $c > 0$）。我們計算 $Y$ 的 MGF :
+\begin{align*}
+M_Y(t) &= E[e^{tY}] \\
+&= E[e^{t(cX)}] \\
+&= E[e^{(ct)X}] \\
+&= M_X(ct)
+\end{align*}
+將 $ct$ 代入 $X$ 的 MGF 公式中
+\[
+M_Y(t) = M_X(ct) = (1 - \beta(ct))^{-\alpha} = \left(1 - (c\beta)t\right)^{-\alpha}
+\]
+觀察 $M_Y(t)$ 的形式，這正是形狀參數為 $\alpha$、尺度參數為 $c\beta$ 的 Gamma 分布之 MGF。
+根據 MGF 的唯一性定理，得證：
+\[
+Y \sim \mathrm{Gamma}(\alpha, c\beta)
+\]
+\subsection*{(2) Weibull power} 
+如果 $W\sim \mathrm{Weibull}(\alpha,\beta)$ 而 CDF 為
+$F_W(w)=1-\exp\!(-(w/\alpha)^\beta) , \forall w>0$, 設 $V=(W/\alpha)^\beta , \forall v\ge 0$.
+\[
+F_V(v)=P\!\left((W/\alpha)^\beta\le v\right)=P\!\left(W\le \alpha v^{1/\beta}\right)
+=1-\exp(-v), \text{此為 Exponential 的 CDF}
+\]
+因此 $V\sim \mathrm{Exp}(1)$.
+
+\hrulefill
+
+\section*{第四題}
+\subsection*{(1) 最小化 $Z$ 的變異數 ($\mathrm{Var}(Z)$)}
+假設有一個組合變數 $Z = \alpha X + (1-\alpha)Y$，我們要找出權重 $\alpha$ 該是多少，
+才能讓 $Z$ 的變異數最小？
+
+\begin{enumerate}
+    \item 獨立性假設：
+    因為 $X$ 和 $Y$ 是獨立的，它們之間沒有線性相關，所以共變異數 $\mathrm{Cov}(X,Y) = 0$。
+    \item 變異數公式：基於上述假設，組合變數 $Z$ 的變異數公式簡化為：
+    \[
+    \mathrm{Var}(Z) = \alpha^2\sigma_X^2 + (1-\alpha)^2\sigma_Y^2
+    \]
+    \item 微分求極值：為了找到使變異數最小的 $\alpha$，我們對 $\alpha$ 進行微分並令其為 0 
+    \[
+    \frac{d}{d\alpha}\mathrm{Var}(Z) = 2\alpha \sigma_X^2 - 2(1-\alpha)\sigma_Y^2 = 0
+    \]
+    \item 求解最佳 $\alpha$：經過移項整理後，得到最佳的權重 $\alpha^*$
+    \[
+    \alpha^* = \frac{\sigma_Y^2}{\sigma_X^2 + \sigma_Y^2}
+    \]
+    \item 確認最小值：計算二階導數 
+    $$\frac{d^2}{d\alpha^2}\mathrm{Var}(Z) = 2(\sigma_X^2 + \sigma_Y^2)$$
+    因為變異數恆為正，二階導數大於 0，代表這確實是一個極小值
+\end{enumerate}
+
+\subsection*{(2) 什麼時候「平均值的變異數」會比「個別的變異數」都還小？}
+\begin{enumerate}
+    \item 平均值的變異數：在獨立的前提下，平均值的變異數為：
+    $$
+    \mathrm{Var}\left(\frac{X+Y}{2}\right) = \frac{1}{4}\mathrm{Var}(X+Y) = 
+    \frac{\sigma_X^2 + \sigma_Y^2}{4}
+    $$
+    \item 設定條件：我們希望這個「平均後的變異數」比原本單獨的 $X$ 或 $Y$ 的變異數都要小，即：
+    $$
+    \frac{\sigma_X^2 + \sigma_Y^2}{4} < \sigma_X^2 \quad \text{且} 
+    \quad \frac{\sigma_X^2 + \sigma_Y^2}{4} < \sigma_Y^2
+    $$
+    \item 推導結果：整理上述不等式：
+    \begin{itemize}
+        \item 對於 $X$ : $\sigma_Y^2 < 3\sigma_X^2$ ($Y$ 的 Variance 小於 $X$ 的 3 倍)
+        \item 對於 $Y$ : $\sigma_X^2 < 3\sigma_Y^2$ ($X$ 的 Variance 小於 $Y$ 的 3 倍)
+    \end{itemize}
+    \item 結論：合併來看，這表示兩者的 Variance 比值必須在 $1/3$ 到 $3$ 之間：
+    $$\boxed{\frac{1}{3} < \frac{\sigma_X^2}{\sigma_Y^2} < 3}$$
+\end{enumerate}
+
+\hrulefill
+
+\section*{第五題}
+\subsection*{(1) 利用 Double Expectation 分解 Covariance} 
+\begin{enumerate}
+    \item 定義展開：首先利用 Covariance 的定義：
+    $$\mathrm{Cov}(X,Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]$$
+    \item 根據 Double Expectation ，我們知道 $\mathbb{E}[XY] = \mathbb{E}[\mathbb{E}[XY \mid X]]$。
+    因為在給定 $X$ 的條件下，$X$ 是一個常數，可以提出內層期望值之外，即 
+    $\mathbb{E}[XY \mid X] = X\,\mathbb{E}[Y \mid X]$。所以：
+    $$\mathbb{E}[XY] = \mathbb{E}\!\big[X\,\mathbb{E}[Y\mid X]\big]$$
+    \item 代回並重組：將上述結果代回原式：
+    $$\mathbb{E}\!\big[X\,\mathbb{E}[Y\mid X]\big] - \mathbb{E}[X]\mathbb{E}[Y]$$
+    \item 根據 Double Expectation 注意到， $\mathbb{E}[Y]$ 也可以寫成 $\mathbb{E}[\mathbb{E}[Y \mid X]]$。
+    因此上式符合 Covariance 的定義結構，即：
+    $$\mathrm{Cov}\!\big(X,\mathbb{E}[Y\mid X]\big)$$
+\end{enumerate}
+\subsection*{(2) 殘差的正交性 (Orthogonality of the Residual)}
+\begin{align*}
+    \mathrm{Cov}\!\big(X,\,Y-\mathbb{E}[Y\mid X]\big)&=
+    \mathrm{Cov}\!\big(X,\,Y)-\mathrm{Cov}\!\big(X,\,\mathbb{E}[Y\mid X]\big)\\
+    &=\mathrm{Cov}(X,\,Y)-\mathrm{Cov}(X,\,Y) \quad (\because \text{第一小題的結論})\\
+    &= 0
+\end{align*}
+
+\hrulefill
+
+\section*{第六題}
+\subsection*{(1) 線性變換後的分布 (Linear Transformation)}
+常態分佈的線性組合仍然是常態分佈。我們可以將 $\bm Y$ 寫成矩陣形式 $\bm Y = A\bm X$，其中變換矩陣 
+$A = \begin{pmatrix}1 & 1 \\ 1 & -1\end{pmatrix}$。
+根據 Bivariate Normal 的性質，$\bm Y \sim N_2(A\bm\mu, A\Sigma A^\top)$
+
+\noindent
+計算結果：
+\begin{enumerate}
+    \item 期望值向量 $\mathbb{E}[\bm Y]$：直接將平均值相加與相減
+    $$\mathbb{E}[\bm Y] = \begin{pmatrix} \mu_1 + \mu_2 \\ \mu_1 - \mu_2 \end{pmatrix}$$
+    \item 共變異數矩陣 $\mathrm{Cov}(\bm Y)$：利用矩陣運算 $A\Sigma A^\top$ 
+    計算後可得：
+    \begin{itemize}
+        \item $Y_1$ 的 Variance ($Var(X_1+X_2)$) 為：
+        $\sigma_1^2 + \sigma_2^2 + 2\sigma_{12}$
+        \item $Y_2$的 Variance ($Var(X_1-X_2)$) 為：$\sigma_1^2 + \sigma_2^2 - 2\sigma_{12}$
+        \item $Y_1$ 與 $Y_2$ 的 Covariance ($Cov(X_1+X_2, X_1-X_2)$) 為：$\sigma_1^2 - \sigma_2^2$
+    \end{itemize}
+\end{enumerate}
+\begin{center}
+    \boxed{
+        \mathbb{E}[\bm Y] = 
+        \begin{pmatrix} 
+            \mu_1 + \mu_2 \\ \mu_1 - \mu_2 
+        \end{pmatrix}
+        , \quad
+        \mathrm{Cov}(\bm Y) = 
+        \begin{pmatrix} 
+            \sigma_1^2 + \sigma_2^2 + 2\sigma_{12} &\sigma_1^2 - \sigma_2^2\\ 
+            \sigma_1^2 - \sigma_2^2 &\sigma_1^2 + \sigma_2^2 - 2\sigma_{12}
+        \end{pmatrix}
+    }
+\end{center}
+\subsection*{(1) 另解：利用期望值與變異數性質(走定義)}
+已知 $Y_1 = X_1 + X_2$ 且 $Y_2 = X_1 - X_2$。
+我們需要找出 $\bm Y$ 的平均向量與共變異數矩陣。
+\begin{enumerate}
+    \item 計算期望值向量 $\mathbb{E}[\bm Y]$利用期望值的線性性質 (Linearity of Expectation) :\\
+    $\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]$。
+    \begin{itemize}
+        \item 計算 $Y_1$ 的期望值：
+        $$\mathbb{E}[Y_1] = \mathbb{E}[X_1 + X_2] = 
+        \mathbb{E}[X_1] + \mathbb{E}[X_2] = \mu_1 + \mu_2$$
+        \item 計算 $Y_2$ 的期望值：
+        $$\mathbb{E}[Y_2] = \mathbb{E}[X_1 - X_2] = \mathbb{E}[X_1] - \mathbb{E}[X_2] = 
+        \mu_1 - \mu_2$$
+        
+    \end{itemize}
+    所以期望值向量為：
+    $$\mathbb{E}[\bm Y] = 
+    \begin{pmatrix} 
+        \mathbb{E}(Y_1) \\ \mathbb{E}(Y_2) 
+    \end{pmatrix} = 
+    \begin{pmatrix} \mu_1 + \mu_2 \\ \mu_1 - \mu_2 \end{pmatrix}$$
+    \item 計算 Covariance matrix ($\mathrm{Cov}(\bm Y)$)\\
+    Covariance matrix 包含三個元素：$Y_1$ 的 Variance、$Y_2$ 的 Variance ，以及它們之間的 Covariance
+    我們利用以下公式：
+    \begin{itemize}
+        \item $Var(X) = Cov(X, X)$
+        \item $Var(aX + bY) = a^2 Var(X) + b^2 Var(Y) + 2ab Cov(X, Y)$
+        \item Covariance 的雙線性性質 (Bilinearity) :
+        $Cov(A+B, C+D) = Cov(A,C) + Cov(A,D) + Cov(B,C) + Cov(B,D)$
+    \end{itemize}
+    步驟一：計算 $Y_1$ 的 Variance (矩陣左上角元素)
+    \begin{align*}
+        Var(Y_1) &= Var(X_1 + X_2) \\
+        &= Var(X_1) + Var(X_2) + 2 Cov(X_1, X_2) \\
+        &= \sigma_1^2 + \sigma_2^2 + 2\sigma_{12}
+    \end{align*}
+    步驟二：計算 $Y_2$ 的 Variance (矩陣右下角元素)注意這裡是相減，係數 $b=-1$，所以 $b^2=1$，但交叉項係數為 $2(1)(-1)=-2$。
+    \begin{align*}
+        Var(Y_2) &= Var(X_1 - X_2) \\
+        &= Var(X_1) + (-1)^2 Var(X_2) + 2(1)(-1) Cov(X_1, X_2) \\
+        &= \sigma_1^2 + \sigma_2^2 - 2\sigma_{12}
+        \end{align*}
+    步驟三：計算 $Y_1$ 與 $Y_2$ 的 Covariance (矩陣非對角元素)直接展開共變異數定義：
+    \begin{align*}
+        Cov(Y_1, Y_2) &= Cov(X_1 + X_2, \; X_1 - X_2) \\
+        &= Cov(X_1, X_1) - Cov(X_1, X_2) + Cov(X_2, X_1) - Cov(X_2, X_2)
+    \end{align*}
+    由於 $Cov(X_1, X_1) = \sigma_1^2$，$Cov(X_2, X_2) = \sigma_2^2$，且 Covariance 具有對稱性 
+    $Cov(X_1, X_2) = Cov(X_2, X_1) = \sigma_{12}$，中間兩項剛好正負抵銷：
+    \begin{align*}
+        Cov(Y_1, Y_2) &= \sigma_1^2 - \sigma_{12} + \sigma_{12} - \sigma_2^2 \\
+        &= \sigma_1^2 - \sigma_2^2
+    \end{align*}
+    \item 整合結果
+    將上述計算出的純量填入矩陣位置：
+    \[
+    \mathbb{E}[\bm Y] = 
+    \begin{pmatrix} 
+        \mathbb{E}(Y_1) \\ \mathbb{E}(Y_2) 
+    \end{pmatrix} = 
+    \begin{pmatrix} 
+        \mu_1 + \mu_2 \\ \mu_1 - \mu_2 
+    \end{pmatrix}
+    \]
+    \[
+    \mathrm{Cov}(\bm Y) = 
+    \begin{pmatrix} 
+        Var(Y_1) &Cov(Y_1, Y_2)\\ 
+        Cov(Y_1, Y_2) &Var(Y_2)
+    \end{pmatrix}
+    =
+    \begin{pmatrix} 
+            \sigma_1^2 + \sigma_2^2 + 2\sigma_{12} &\sigma_1^2 - \sigma_2^2\\ 
+            \sigma_1^2 - \sigma_2^2 &\sigma_1^2 + \sigma_2^2 - 2\sigma_{12}
+    \end{pmatrix}
+    \]
+\end{enumerate}
+最後補充說明分布性質：
+由於 $X_1, X_2$ 是 Bivariate Normal ，而 $Y_1, Y_2$ 是 $X_1, X_2$ 的線性組合，
+因此 $\bm Y$ 依然服從 Bivariate Normal。
+\begin{center}
+    \boxed{$$\bm Y \sim N(\mathbb{E}[\bm Y], \mathrm{Cov}(\bm Y))$$}
+\end{center}
+\subsection*{(2) 條件分佈 (Conditional Distribution)}
+這是 Bivariate Normal 的一個重要性質。當我們已知其中一個變數 $X_2 = x_2$ 時，$X_1$ 
+的 Conditional Distribution 仍然是 Normal distribution (one dimensional)。\\
+
+公式應用： 利用條件期望值與條件變異數的公式：
+\begin{itemize}
+    \item Conditional Expectation (Mean):
+    原本的 $\mu_1$ 加上修正項。修正項取決於相關性與 $x_2$ 偏離 $\mu_2$ 的程度。
+    $$E[X_1|X_2=x_2] = \mu_1 + \frac{\sigma_{12}}{\sigma_2^2}(x_2 - \mu_2)$$
+    \item Conditional Variance (Variance): 已知 $X_2$ 資訊後，不確定性會降低。
+    $$Var(X_1|X_2=x_2) = \sigma_1^2 - \frac{\sigma_{12}^2}{\sigma_2^2}$$
+\end{itemize}
+\begin{center}
+    \boxed{X_1|X_2=x_2 \sim N 
+    \left(
+        \mu_1 + \frac{\sigma_{12}}{\sigma_2^2}(x_2 - \mu_2), 
+        \sigma_1^2 - \frac{\sigma_{12}^2}{\sigma_2^2}
+    \right)}
+\end{center}
+\subsection*{(2) 另解：建構獨立變數法 (Constructive Method)}
+我們的目標是找出 $X_1$ 在已知 $X_2=x_2$ 下的分布。
+我們可以假設 $X_1$ 和 $X_2$ 之間存在線性關係，並加上一個殘差項 $Z$:
+$$X_1 = \alpha X_2 + Z$$
+其中 $\alpha$ 是常數，$Z$ 是一個與 $X_2$ 獨立的隨機變數 
+(在常態分佈中， uncorrelated 即 independent ，在下一小題也會用到這個性質)。\\
+
+步驟 1:
+求出係數 $\alpha$為了讓 $Z$ 與 $X_2$ 獨立，它們的共變異數必須為 0。
+對等式兩邊與 $X_2$ 取共變異數：
+\begin{align*}
+    Cov(X_1, X_2) &= Cov(\alpha X_2 + Z, \; X_2) \\
+    \sigma_{12} &= \alpha \cdot Cov(X_2, X_2) + Cov(Z, X_2)
+\end{align*}
+因為我們要求 $Z \perp X_2$，所以 $Cov(Z, X_2) = 0$。
+上式變為：
+$$\sigma_{12} = \alpha \sigma_2^2 \quad \Longrightarrow \quad \boxed{\alpha = 
+\frac{\sigma_{12}}{\sigma_2^2}}$$
+
+步驟 2:
+分析殘差項 $Z$ 的分布既然 $Z = X_1 - \alpha X_2$，且 $X_1, X_2$ 為 Bivariate Normal 
+，則 $Z$ 亦為常態分佈。我們需要算出 $Z$ 的 Expectation 與 Variance 。
+\begin{itemize}
+    \item 計算 $E[Z]$：
+    \begin{align*}
+        E[Z] &= E[X_1] - \alpha E[X_2] \\
+        &= \mu_1 - \frac{\sigma_{12}}{\sigma_2^2}\mu_2
+    \end{align*}
+    \item 計算 $Var(Z)$:
+    利用變異數公式 $Var(A - B) = Var(A) + Var(B) - 2Cov(A,B)$:
+    \begin{align*}
+        Var(Z) &= Var(X_1 - \alpha X_2) \\
+        &= Var(X_1) + \alpha^2 Var(X_2) - 2\alpha Cov(X_1, X_2) \\
+        &= \sigma_1^2 + \left(\frac{\sigma_{12}}{\sigma_2^2}\right)^2 \sigma_2^2 - 2\left(\frac{\sigma_{12}}{\sigma_2^2}\right) \sigma_{12} \\
+        &= \sigma_1^2 + \frac{\sigma_{12}^2}{\sigma_2^2} - \frac{2\sigma_{12}^2}{\sigma_2^2} \\
+        &= \sigma_1^2 - \frac{\sigma_{12}^2}{\sigma_2^2}
+    \end{align*}
+\end{itemize}
+
+步驟 3:求條件分佈 $X_1 \mid X_2 = x_2$\\
+回到最開始的假設：$X_1 = \alpha X_2 + Z$。當我們給定條件 $X_2 = x_2$ (已知常數) 時：
+\begin{enumerate}
+    \item 條件期望值：$x_2$ 已經是常數，直接代入；而 $Z$ 與 $X_2$ 獨立，
+    故 Conditional Expectation 等於 Unconditional Expectation。
+    \begin{align*}
+        E[X_1 \mid X_2=x_2] &= E[\alpha x_2 + Z] \\
+        &= \alpha x_2 + E[Z] \\
+        &= \frac{\sigma_{12}}{\sigma_2^2} x_2 + \left(\mu_1 - \frac{\sigma_{12}}{\sigma_2^2}\mu_2\right) \\
+        &= \boxed{\mu_1 + \frac{\sigma_{12}}{\sigma_2^2}(x_2 - \mu_2)}
+    \end{align*}
+    \item 條件變異數：$x_2$ 是常數，對 Variance 無影響，而 $Z$ 獨立於 $X_2$， Variance 不變。
+    \begin{align*}
+        Var(X_1 \mid X_2=x_2) &= Var(\alpha x_2 + Z \mid X_2=x_2) \\
+        &= Var(Z) \\
+        &= \boxed{\sigma_1^2 - \frac{\sigma_{12}^2}{\sigma_2^2}}
+    \end{align*}
+\end{enumerate}
+結論\\
+綜合以上，得到條件分佈：
+\begin{center}
+    \boxed{X_1|X_2=x_2 \sim N 
+    \left(
+        \mu_1 + \frac{\sigma_{12}}{\sigma_2^2}(x_2 - \mu_2), 
+        \sigma_1^2 - \frac{\sigma_{12}^2}{\sigma_2^2}
+    \right)}
+\end{center}
+
+\subsection*{(3)獨立性 (Independence)}
+Multivariate Normal Family 中有一個極強的性質: Uncorrelated 等價於 Independent。
+也就是說，只要 Covariance 為零，變數之間就是 Independent。
+從 (a) 部分我們算出 $Y_1$ 和 $Y_2$ 的 Covariance 為：
+$$\mathrm{Cov}(Y_1, Y_2) = \sigma_1^2 - \sigma_2^2$$
+要讓 $Y_1$ 與 $Y_2$ Independent ($Y_1 \perp Y_2$)，若且維若 ( if and only if ) 
+Covariance 為 0:
+$$\sigma_1^2 - \sigma_2^2 = 0 \implies \sigma_1^2 = \sigma_2^2$$
+結論：
+$$\boxed{~Y_1 \perp Y_2 \quad\Longleftrightarrow\quad \sigma_1^2=\sigma_2^2.~}$$
+\hrulefill
+
+\section*{第七題}
+\subsection*{(1) Jensen inequality}
+設 $g(x) = -\ln x , \, x \in (0,\infty) $
+\[
+\frac{d^2}{dx^2} g(x) = \frac{d^2}{dx^2} (-\ln x) = \frac{d}{dx} (-\frac{1}{x}) =
+\frac{1}{x^2} > 0 , \, \forall x \in (0,\infty)
+\]
+由於 $-\ln x$ 在 $(0,\infty)$ 上是 $\mathbf{convex \,\, function}$(一定要寫，不然扣分) ，
+根據 Jensen's inequality 可得：
+\[
+\boxed{\mathbb{E}[-\ln (X)] \ge -\ln (\mathbb{E}[X])}
+\]
+\subsection*{(2) $Y=X_1+X_2$ 與 $Z=X_2+X_3$ 的相關係數 (Correlation)}
+已知對於 $i\neq j$ ， $\mathrm{Var}(X_i)=\sigma^2$ 且 
+$\mathrm{Cov}(X_i,X_j)=\rho_{ij}\sigma^2$，則：
+\begin{align*}
+    \mathrm{Var}(Y)&=\sigma^2+\sigma^2+2\rho_{12}\sigma^2=2\sigma^2(1+\rho_{12})\\
+    \mathrm{Var}(Z)&=2\sigma^2(1+\rho_{23})\\
+    \mathrm{Cov}(Y,Z)&=\rho_{12}\sigma^2+\rho_{13}\sigma^2+\sigma^2+\rho_{23}\sigma^2
+    =\sigma^2\big(1+\rho_{12}+\rho_{13}+\rho_{23}\big).
+\end{align*}
+因此
+$$
+\rho_{YZ}
+=\frac{\mathrm{Cov}(Y,Z)}{\sqrt{\mathrm{Var}(Y)\mathrm{Var}(Z)}}=
+\frac{1+\rho_{12}+\rho_{13}+\rho_{23}}{2\sqrt{(1+\rho_{12})(1+\rho_{23})}}
+$$
+當 $\rho_{12}=0.3,\rho_{13}=0.5,\rho_{23}=0.2$ 時，此式等於
+$$
+\boxed{
+\displaystyle \rho_{YZ} = \frac{2}{2\sqrt{1.3\cdot 1.2}} = \frac{5}{\sqrt{39}}
+}
+$$
+\subsection*{(3) $X\sim U(0,1)$ 的精確尾端機率 (Exact tail probability)}
+先計算 Expectation 和 Variance
+\[
+    \mu_X = \int_{0}^{1} x \cdot 1 dx = \frac{1}{2}
+\]
+\[
+    \sigma_X = \sqrt{\int_{0}^{1} x^2 \cdot 1 dx - (\frac{1}{2})^2 \,}= \frac{1}{2\sqrt{3}}
+\]
+在 $\mu_X=1/2$ 且 $\sigma_X=1/2\sqrt{3}$。
+那麼對於 $0<k<\sqrt{3}$，其中心區間 (central interval)
+$\big[\tfrac12-\frac{k}{2\sqrt{3}},\,\tfrac12+\frac{k}{2\sqrt{3}}\big]\subset(0,1)$，且
+$$P\!\left(\left|X-\mu_X\right|\ge k\sigma_X\right)
+=1-\int_{1/2-k/2\sqrt{3}}^{1/2+k/2\sqrt{3}} 1 \, dx
+=1-\frac{k}{\sqrt{3}}.$$故對於 $0<k<\sqrt{3}$
+$$\boxed{~P(|X-\mu_X|\ge k\sigma_X)=1-\tfrac{k}{\sqrt{3}}~}$$
+\subsection*{(4) 切比雪夫比較 (Chebyshev comparison)}
+Chebyshev's inequality 給出了以下的上界 (upper bound):
+$$
+P\!\left(|X-\mu_X|\ge k\sigma_X\right)\le \frac{1}{k^2}
+$$
+然後舉出幾個具體的數字計算比較一下，類似下面這樣
+\begin{table}[htbp]
+    \centering
+    \caption{均勻分佈 $U(0,1)$ 尾端機率與 Chebyshev 上界之數值比較}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{cccl}
+    \toprule
+    \textbf{$k$ 值} & \textbf{精確值 (均勻分佈)} & \textbf{Chebyshev 上界} & \\
+    (標準差倍數) & $1 - k/\sqrt{3}$ & $1/k^2$ & \textbf{觀察與結論} \\
+    \midrule
+    $1$ & $\approx 0.423$ & $1.000$ & 上界極度寬鬆 \\
+    $\sqrt{2} \approx 1.414$ & $\approx 0.184$ & $0.500$ & 上界約為精確值的 2.7 倍 \\
+    $1.5$ & $\approx 0.134$ & $\approx 0.444$ & 差距顯著擴大 \\
+    $\sqrt{3} \approx 1.73$ & $0$ & $\approx 0.334$ & 精確值為 0 ，上界仍大 \\
+    $2$ & $0$ \footnotesize{(超出範圍)} & $0.250$ & 實際上不可能發生 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\clearpage
+\begin{center}
+    {\Huge \textbf{武功秘笈}}
+\end{center}
+以下是來自我這個修第二次才過這門課的學長的一些心得以及認為有用的技巧
+\begin{center}
+    {\huge \textbf{心得}}
+\end{center}
+首先是，期中考第二章一定要讀， Double Expectation 非常重要，
+不要因為第三章確實比較困難就只在第三章投時間，你這樣讀期中考爆炸完全正常，
+然後是作業要搞懂，老師不太會出一模一樣的題目，不過題目觀念是一樣的，作業有搞懂一定會寫，
+至少拿個 30, 40 分絕對沒有問題。最後是，我修的這兩年考試都在演講廳，桌子很小，
+你如果想拿高分一定得拚速度，但考試是真的難受，時間偏短再加考場的 debuff 你要及格觀念一定要練熟，
+隨便猶豫一下，影響都偏大。我只能說我整張大致會寫，但還是受時間限制，其實寫不完，只考 75 分， 
+所以觀念一定要熟，以這次考試來說二三五都算觀念題，計算很少，請務必拿分，
+而四六七也算觀念題，你有好好讀多花點時間也一定有辦法算，
+只有第一題是所需技巧較為複雜，考試時該跳過就跳過，寫不出來就算了。
+\vspace{0.5cm}
+\begin{center}
+    {\huge \textbf{技巧}}
+\end{center}
+\vspace{0.5cm}
+\begin{center}
+    {\Large \textbf{Moment Generating Function}}
+\end{center}
+\section*{MGF 代換法的實戰範例}
+關於 MGF 其實是可以做很多東西的，不只是單純的微分 n 次，求第 n 階導數。
+通過變數變換，我們會有很多技巧可以用。
+
+\noindent
+「只要與分布獨立，什麼東西都可以塞進 $M(t)$ 的 $t$ 裡面」，請看以下三個範例：
+
+\subsection*{Level 1:最常見的線性變換 (Linear Transformation)}
+\textbf{情境：} 已知 $X$ 的 MGF 為 $M_X(t)$，求 $Y = 3X$ 的 MGF。
+
+\textbf{解法：}
+$$ M_Y(t) = E[e^{tY}] = E[e^{t(3X)}] = E[e^{(3t)X}] $$
+這裡，$N$ 變成了 $X$，而原本係數位置是 $3t$。
+\begin{itemize}
+    \item 把 $3t$ 視為一個整體的參數
+    \item 直接代入 $X$ 的 MGF 函數中
+\end{itemize}
+\textbf{結論：} $M_Y(t) = M_X(3t)$ 。在第三題第一小題的另解我們就使用了這個技巧， 
+
+\subsection*{Level 2:對數常態分佈的動差 (The Log-Normal Trap)}
+\textbf{情境：} 設 $Z \sim \text{Normal}(0, 1)$，求隨機變數 $Y = e^Z$ 的 3 階動差 $E[Y^3]$。
+(這題硬積分會積到懷疑人生，用 MGF 代換法秒殺)
+
+\textbf{解法：}
+1. 寫出定義：
+$$ E[Y^3] = E[(e^Z)^3] = E[e^{3Z}] $$
+2. 觀察形式：
+這正是 $Z$ 的 MGF 定義 $E[e^{tZ}]$，只是這裡的 $t$ 剛好等於整數 $3$。
+3. 代入公式：
+標準常態的 MGF 為 $M_Z(t) = e^{t^2/2}$。
+直接把 $t=3$ 塞進去：
+$$ E[Y^3] = M_Z(3) = e^{3^2/2} = e^{4.5} $$
+
+這裡演示了參數 $t$ 不一定要是變數，也可以是純數字(例如 3)。
+
+\subsection*{Level 3:特徵函數 (Characteristic Function) - 虛數也能塞}
+\textbf{情境：} 在高等機率論中，我們會遇到特徵函數 $\phi_X(t) = E[e^{itX}]$，其中 $i = \sqrt{-1}$。
+
+\textbf{解法：}
+觀察 $E[e^{(it)X}]$，係數是 $(it)$。
+只要 $M_X(t)$ 存在，我們甚至可以把虛數 $it$ 塞進 MGF 的插槽裡：
+$$ \phi_X(t) = M_X(it) $$
+
+\textbf{總結：}
+無論是 $3t$ (變數)、$3$ (常數)、$it$ (虛數)，還是像是第一題的 $\ln A$ (複雜常數) ， 
+\textbf{只要它獨立於隨機變數本身，就有資格當作 MGF 的參數！}
+
+\section*{高階動差速算法：如何避免微分微到手斷掉？}
+
+假設題目要求 $X$ 的 6 階動差 $E[X^6]$。
+笨方法是對 $M_X(t)$ 微分 6 次後代 $t=0$。千萬不要這樣做！請用以下兩招：
+
+\subsection*{招式一：降維打擊法 (變數代換)}
+\textbf{思路：} 將 $X$ 的高次項視為一個新的變數 $Y$ 的低次項。
+$$ E[X^6] = E[(X^2)^3] \implies \text{令 } Y = X^2, \text{ 則求 } E[Y^3] $$
+這樣我們只需要對 $M_Y(t)$ 微分 3 次。
+
+\textbf{經典範例：常態分佈轉卡方分佈}
+設 $X \sim N(0, 1)$，求 $E[X^6]$。
+\begin{enumerate}
+    \item 若直接算：$M_X(t) = e^{t^2/2}$，微 6 次非常容易錯。
+    \item 轉換：令 $Y = X^2$。已知標準常態平方是卡方分佈 $Y \sim \chi^2_1$ (即 Gamma($1/2, 2$))。
+    \item Gamma 的 MGF:$M_Y(t) = (1 - 2t)^{-1/2}$。
+    \item 微分 3 次：
+    \begin{align*}
+    M_Y'(t) &= (-1/2)(1-2t)^{-3/2}(-2) = (1-2t)^{-3/2} \\
+    M_Y''(t) &= (-3/2)(1-2t)^{-5/2}(-2) = 3(1-2t)^{-5/2} \\
+    M_Y'''(t) &= (-15/2)(1-2t)^{-7/2}(-2) = 15(1-2t)^{-7/2}
+    \end{align*}
+    \item 代入 $t=0$:$15(1)^{-7/2} = 15$。
+\end{enumerate}
+\textbf{結論：} 從微 6 次降為微 3 次，且函數形式 (冪函數) 比指數函數更好微。
+
+\subsection*{招式二：級數展開法 (The Ultimate Weapon)}
+\textbf{思路：} 若能寫出 MGF 的泰勒展開式，則完全\textbf{不需要微分}。
+
+根據定義：
+$$ M_X(t) = \sum_{n=0}^{\infty} \frac{E[X^n]}{n!} t^n = 1 + E[X]t + \frac{E[X^2]}{2!}t^2 + \dots + \frac{E[X^6]}{6!}t^6 + \dots $$
+\textbf{則：}
+$$ E[X^n] = (\text{$t^n$ 的係數}) \times n! $$
+
+\textbf{範例重解：} $X \sim N(0, 1)$，求 $E[X^6]$。
+\begin{enumerate}
+    \item 已知 $M_X(t) = e^{t^2/2}$。
+    \item 利用 $e^u = 1 + u + \frac{u^2}{2!} + \frac{u^3}{3!} + \dots$ 展開，令 $u = t^2/2$。
+    $$ e^{t^2/2} = 1 + \left(\frac{t^2}{2}\right) + \frac{1}{2!}\left(\frac{t^2}{2}\right)^2 + \frac{1}{3!}\left(\frac{t^2}{2}\right)^3 + \dots $$
+    \item 我們只關心 $t^6$ 項，它出現在 $u^3$ 那一項：
+    $$ \text{Term}(t^6) = \frac{1}{6} \left(\frac{t^6}{8}\right) = \frac{1}{48} t^6 $$
+    \item 抓出係數 $1/48$，直接乘上 $6!$：
+    $$ E[X^6] = \frac{1}{48} \times 720 = \frac{720}{48} = 15 $$
+\end{enumerate}
+\textbf{結論：} 一次微分都不用做，直接代數運算解出答案。
+\end{document}
