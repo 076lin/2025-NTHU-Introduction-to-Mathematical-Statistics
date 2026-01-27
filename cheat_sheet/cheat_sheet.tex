@@ -1,0 +1,321 @@
+% !TeX program = xelatex
+\documentclass{article}
+\usepackage{xeCJK, amsmath, amssymb, geometry, graphicx, float}
+\usepackage{multicol}
+
+% 設定中文字體 (若你在 Windows/Mac 編譯報錯，請確認系統是否有標楷體，或改為 'Taipei Sans TC Beta' 等)
+\setCJKmainfont{標楷體}
+
+% 設定極窄邊距
+\geometry{a4paper, margin=1cm}
+
+\title{}
+\author{111020003 林群佑}
+\date{}
+
+% --- 樣式設定 ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.2em}
+\newcommand{\sectiontitle}[1]{\vspace{0.1cm}\textbf{\underline{#1}}\vspace{0.1cm}}
+\newcommand{\distname}[1]{\textbf{#1}}
+
+% 數學公式間距設定
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+
+\begin{document}
+
+\vspace{-1.5cm}
+
+\begin{multicols*}{2}
+
+% =========================================
+% 1. 不等式 (Inequalities)
+% =========================================
+\sectiontitle{1. Inequalities}
+
+\distname{Markov's Inequality:}
+\[ P(u(X) > c) \le \frac{E[u(X)]}{c} \]
+
+\distname{Chebyshev's Inequality:}
+\[ P(|X-\mu| \le k\sigma) \ge 1 - \frac{1}{k^2} \quad \text{or} \quad P(|X-\mu| > k\sigma) \le \frac{1}{k^2} \]
+\textbf{Proof:} $Var(X) = E[(X-\mu)^2]$. Let $u(X)=(X-\mu)^2$. By Markov's:
+$P((X-\mu)^2 > c) \le \frac{E[(X-\mu)^2]}{c}$.
+Let $c = k^2\sigma^2$, then $P(|X-\mu| > k\sigma) \le \frac{\sigma^2}{k^2\sigma^2} = \frac{1}{k^2}$.
+
+\distname{Jensen's Inequality:}
+If $f''(x) \ge 0$ (convex), then $f(E[X]) \le E[f(X)]$.
+If $f''(x) > 0$ (strictly convex), then $f(E[X]) < E[f(X)]$.
+
+% =========================================
+% 2. 變數變換與 MGF
+% =========================================
+\sectiontitle{2. Transformation \& MGF}
+
+\distname{Moment Generating Function (MGF):}
+$M^{(m)}(0) = E[X^m]$, if $m \in \mathbb{N}$.
+\textbf{Theorem:} $F_X(z) = F_Y(z)$ iff $M_X(t) = M_Y(t), \forall -h<t<h$.
+
+\distname{Expectation Existence:}
+If $\int_{-\infty}^{\infty} |x|f(x)dx < \infty$, then $E[X] = \int_{-\infty}^{\infty} xf(x)dx$.
+
+\distname{Transformation $Y=g(X)$:}
+\[ f_Y(y) = f_X(g^{-1}(y)) \left| \frac{d}{dy}g^{-1}(y) \right| \]
+CDF method ($F_Y(y) = P(g(X) \le y)$):
+\begin{itemize}
+    \item Case 1 ($g \uparrow$): $F_Y(y) = F_X(g^{-1}(y))$
+    \item Case 2 ($g \downarrow$): $F_Y(y) = 1 - F_X(g^{-1}(y))$
+\end{itemize}
+\distname{Multivariate Transformation:}
+Let $\mathbf{Y} = T(\mathbf{X})$, $\mathbf{X} = T^{-1}(\mathbf{Y})$.
+\\ $f_\mathbf{Y}(\mathbf{y}) = f_\mathbf{X}(T^{-1}(\mathbf{y})) \cdot |J|$, where $J = \det \left( \frac{\partial \mathbf{x}}{\partial \mathbf{y}} \right)$.
+% =========================================
+% 3. 雙重期望值與多變量常態
+% =========================================
+\sectiontitle{3. Double Expectation \& Bivariate Normal}
+
+\distname{Double Expectation (Adam's Law):}
+\[ E_{X_1}[E[X_2|X_1]] = E[X_2] \]
+\distname{Conditional Variance (Eve's Law):}
+\[ Var(X_2) = E[Var(X_2|X_1)] + Var(E[X_2|X_1]) \]
+
+\distname{Covariance properties:}
+$Cov(X,Y) = E[XY] - \mu_X \mu_Y$.
+$Var(aX+bY) = a^2\sigma_X^2 + b^2\sigma_Y^2 + 2ab Cov(X,Y)$.
+
+\distname{Bivariate Normal $(X,Y)$:}
+Notation: $(X,Y) \sim N_2(\mu_X, \mu_Y, \sigma_X^2, \sigma_Y^2, \rho)$.
+\\ \textbf{PDF:} $f(x,y) = \frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}} \exp\left\{-\frac{Q}{2(1-\rho^2)}\right\}$
+\\ $Q = (\frac{x-\mu_X}{\sigma_X})^2 - 2\rho(\frac{x-\mu_X}{\sigma_X})(\frac{y-\mu_Y}{\sigma_Y}) + (\frac{y-\mu_Y}{\sigma_Y})^2$
+\\ \textbf{MGF:} $\exp(t_1\mu_X + t_2\mu_Y + \frac{1}{2}(t_1^2\sigma_X^2 + t_2^2\sigma_Y^2 + 2\rho t_1 t_2 \sigma_X \sigma_Y))$
+\\ \textbf{Indep:} For Bivariate Normal, Uncorrelated ($\rho=0$) $\iff$ Independent.
+
+\distname{Conditional Normal Distribution:}
+If $(X,Y)$ is Bivariate Normal, then $Y|X=x$ is Normal.
+\\ $E[Y|X=x] = \mu_Y + \rho \frac{\sigma_Y}{\sigma_X}(x-\mu_X)$ (Linear Regression)
+\\ $Var(Y|X=x) = \sigma_Y^2(1-\rho^2)$ (Constant Variance)
+
+% =========================================
+% 4. 離散分佈 (Discrete)
+% =========================================
+\sectiontitle{4. Discrete Distributions}
+
+\distname{Bernoulli($p$):} $E=p, Var=p(1-p)$.
+
+\distname{Binomial($n, p$):}
+$P(X=k) = \binom{n}{k} p^k q^{n-k}$
+\\ $E=np, Var=npq, M(t)=(pe^t+q)^n$
+
+\distname{Geometric($p$):} ($x$ failures before 1st success)
+$P(X=x) = p(1-p)^x, x \in \{0, 1, \dots\}$
+\\ $E[X] = \frac{1-p}{p}, Var(X) = \frac{1-p}{p^2}$
+\\ (Note: If counting trials $n \ge 1$, $E=1/p, Var=(1-p)/p^2$)
+
+\distname{Negative Binomial($r, p$):} ($y$ fails before $r$ success)
+$P(Y=y) = \binom{y+r-1}{y} p^r (1-p)^y$
+\\ $M_Y(t) = (\frac{p}{1-(1-p)e^t})^r$, $E=\frac{r(1-p)}{p}, Var=\frac{r(1-p)}{p^2}$
+
+\distname{Multinomial:}
+$P(X_1 \dots X_k) = \frac{n!}{x_1! \dots x_k!} p_1^{x_1} \dots p_k^{x_k}$
+\\ $E[X_i] = np_i, Var(X_i) = np_i(1-p_i)$
+\\ $Cov(X_i, X_j) = -np_i p_j$
+\\ $M(\mathbf{t}) = (\sum p_i e^{t_i})^n$
+
+\distname{Hypergeometric:}
+$P(X=k) = \frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$
+\\ $E[X] = \frac{nK}{N}, Var(X) = \frac{nK}{N}(1-\frac{K}{N})\frac{N-n}{N-1}$
+
+\distname{Poisson($\lambda$):}
+$P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}$
+\\ $E=\lambda, Var=\lambda, M(t) = \exp(\lambda(e^t-1))$
+
+% =========================================
+% 5. 連續分佈 (Continuous)
+% =========================================
+\sectiontitle{5. Continuous Distributions}
+
+\distname{Exponential($\lambda$):}
+$f(x) = \lambda e^{-\lambda x}, x \ge 0$
+\\ $E[X] = 1/\lambda, Var(X) = 1/\lambda^2$
+\\ $F(x) = 1 - e^{-\lambda x}$
+
+\distname{Gamma($\alpha, \beta$):}
+$f(x) = \frac{x^{\alpha-1}e^{-x/\beta}}{\beta^\alpha \Gamma(\alpha)}$
+\\ $E=\alpha\beta, Var=\alpha\beta^2, M(t)=(1-\beta t)^{-\alpha}$
+\\ $\Gamma(\alpha) = (\alpha-1)!$ if integer.
+
+\distname{Chi-Squared($k$):} ($Gamma(k/2, 2)$)
+$f(x) = \frac{x^{k/2-1}e^{-x/2}}{2^{k/2}\Gamma(k/2)}$
+\\ $E=k, Var=2k, M(t)=(1-2t)^{-k/2}$
+
+\distname{Beta($\alpha, \beta$):}
+$f(x) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1}(1-x)^{\beta-1}$
+\\ $E[X] = \frac{\alpha}{\alpha+\beta}$
+\\ $Var(X) = \frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$
+
+\distname{Normal($\mu, \sigma^2$):}
+$f(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
+\\ $E=\mu, Var=\sigma^2, M(t) = e^{\mu t + \sigma^2 t^2 / 2}$
+
+\distname{Student's t ($v$):}
+$T = \frac{Z}{\sqrt{V/v}}$ where $Z \sim N(0,1), V \sim \chi^2_v$ indep.
+\\ $E[T] = 0$ (if $v>1$), $Var(T) = \frac{v}{v-2}$ (if $v>2$).
+\\ PDF is bell-shaped but heavier tails than Normal.
+
+\distname{F Distribution ($n, m$):}
+$F = \frac{U/n}{V/m}$ where $U \sim \chi^2_n, V \sim \chi^2_m$ indep.
+\\ $E[F] = \frac{m}{m-2}$ (if $m>2$).
+\\ Relationship: $T_v^2 \sim F_{1, v}$.
+
+\distname{Additive Properties (Indep $X_i$):}
+\\ $X_i \sim Gamma(\alpha_i, \beta) \implies \sum X_i \sim Gamma(\sum \alpha_i, \beta)$
+\\ $X_i \sim \chi^2_{k_i} \implies \sum X_i \sim \chi^2_{\sum k_i}$
+\\ $X_i \sim N(\mu_i, \sigma_i^2) \implies \sum (a_i X_i) \sim N(\sum a_i \mu_i, \sum a_i^2 \sigma_i^2)$
+\\ $X_i \sim Poisson(\lambda_i) \implies \sum X_i \sim Poisson(\sum \lambda_i)$
+% =========================================
+% 6. 極限定理與估計
+% =========================================
+\sectiontitle{6. Limit Theorems \& Estimation}
+
+\distname{Central Limit Theorem (CLT):}
+$\frac{S_n - n\mu}{\sigma\sqrt{n}} = \frac{\sqrt{n}(\overline{X}_n - \mu)}{\sigma} \xrightarrow{d} N(0,1)$.
+
+\distname{Delta Method (1st \& 2nd Order):}
+Let $Y \sim (\theta, \sigma^2_Y)$ and $Y \xrightarrow{P} \theta$.
+\\ \textbf{1. First Order (Variance Approx):}
+\\ $g(Y) \approx g(\theta) + g'(\theta)(Y-\theta)$
+\\ $\Rightarrow Var(g(Y)) \approx [g'(\theta)]^2 \sigma^2_Y$.
+\\ \textbf{2. Second Order (Bias Correction):}
+\\ $g(Y) \approx g(\theta) + g'(\theta)(Y-\theta) + \frac{1}{2}g''(\theta)(Y-\theta)^2$
+\\ Taking expectation ($E[Y-\theta]=0, E[(Y-\theta)^2]=\sigma^2_Y$):
+\\ $\Rightarrow E[g(Y)] \approx g(\theta) + \frac{1}{2}g''(\theta)\sigma^2_Y$.
+\\ (Note: If $g''(\theta) \neq 0$, $g(\bar{X})$ is a biased estimator of $g(\theta)$).
+
+\distname{Weak Law of Large Numbers (WLLN):}
+$\overline{X}_n \xrightarrow{P} \mu$.
+Proof by Chebyshev: $P(|\overline{X}_n - \mu| \ge \epsilon) \le \frac{\sigma^2}{n\epsilon^2} \to 0$.
+
+\distname{Strong Law of Large Numbers (SLLN):}
+Kolmogorov: $\overline{X}_n \xrightarrow{a.s.} \mu$ iff $E[|X_i|] < \infty$.
+$P(\lim_{n \to \infty} \overline{X}_n = \mu) = 1$.
+
+\distname{Maximum Likelihood (MLE):}
+$L(\theta) = \prod f(x_i; \theta)$. Maximize $\ln L(\theta)$.
+\\ Property: $\hat{\theta}_{MLE} \xrightarrow{P} \theta_0$, $\sqrt{n}(\hat{\theta}-\theta_0) \to N(0, I(\theta_0)^{-1})$.
+
+\distname{Order Statistics:}
+$g(y_1 \dots y_n) = n! \prod f(y_i), a < y_1 < \dots < y_n < b$
+\\ $g_k(y_k) = \frac{n!}{(k-1)!(n-k)!} [F(y_k)]^{k-1} [1-F(y_k)]^{n-k} f(y_k)$
+\\ $f_{\min}(y) = n[1-F(y)]^{n-1}f(y)$
+\\ $f_{\max}(y) = n[F(y)]^{n-1}f(y)$
+
+\sectiontitle{7. Confidence Intervals (Chapter 4)}
+
+\distname{Mean ($\mu$):}
+\begin{itemize}
+    \item $\sigma^2$ known: $\overline{X} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}$
+    \item $\sigma^2$ unknown: $\overline{X} \pm t_{\alpha/2, n-1} \frac{S}{\sqrt{n}}$
+\end{itemize}
+
+\distname{Difference of Means ($\mu_1 - \mu_2$):}
+\begin{itemize}
+    \item $\sigma_{1,2}^2$ known: $(\bar{X}-\bar{Y}) \pm z_{\alpha/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}$
+    \item $\sigma_{1,2}^2$ unknown ($n$ large): use $S_1, S_2$ replace $\sigma$.
+    \item Equal Var $\sigma_1^2=\sigma_2^2$: $(\bar{X}-\bar{Y}) \pm t_{\alpha/2, n_1+n_2-2} S_p \sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$
+    \\ where $S_p^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1+n_2-2}$
+\end{itemize}
+
+\distname{Proportion ($p$):} (Large Sample)
+$\hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+
+\distname{Variance ($\sigma^2$):} (Normal Population)
+$\left( \frac{(n-1)S^2}{\chi^2_{\alpha/2, n-1}}, \frac{(n-1)S^2}{\chi^2_{1-\alpha/2, n-1}} \right)$
+
+\sectiontitle{8. Convergence \& Asymptotics}
+
+\distname{Relations:}
+$X_n \xrightarrow{P} X \implies X_n \xrightarrow{D} X$.
+\\ $X_n \xrightarrow{D} c \iff X_n \xrightarrow{P} c$ (constant $c$).
+
+\distname{Slutsky's Theorem:}
+If $X_n \xrightarrow{D} X$ and $Y_n \xrightarrow{P} c$, then:
+\\ $X_n + Y_n \xrightarrow{D} X+c$, \quad $X_n Y_n \xrightarrow{D} cX$.
+
+\distname{Continuous Mapping Theorem:}
+If $X_n \xrightarrow{P} X$ and $g$ is continuous, then $g(X_n) \xrightarrow{P} g(X)$. (Also holds for $\xrightarrow{D}$).
+
+\distname{Fisher Information:}
+$I(\theta) = E\left[ \left( \frac{\partial}{\partial \theta} \ln f(X;\theta) \right)^2 \right] = -E\left[ \frac{\partial^2}{\partial \theta^2} \ln f(X;\theta) \right]$
+\\ \textbf{Asymptotic Normality of MLE:}
+\\ $\sqrt{n}(\hat{\theta}_{MLE} - \theta_0) \xrightarrow{D} N(0, I_1(\theta_0)^{-1})$
+
+\distname{Estimation of Fisher Information:}
+Since $\theta_0$ is unknown, we estimate $I(\theta_0)$ using $\hat{\theta}_{MLE}$:
+\\ \textbf{1. Expected Fisher Information (at $\hat{\theta}$):}
+\\ $\hat{I}_n(\hat{\theta}) = n I_1(\hat{\theta}) = n E\left[ \left( \frac{\partial}{\partial \theta} \ln f(X;\theta) \right)^2 \bigg|_{\theta=\hat{\theta}} \right]$
+\\ \textbf{2. Observed Fisher Information:}
+\\ $J_n(\hat{\theta}) = -\sum_{i=1}^n \frac{\partial^2}{\partial \theta^2} \ln f(X_i; \theta) \bigg|_{\theta=\hat{\theta}}$
+\\ \textbf{Result:} For large $n$, both provide approximations for variance:
+\\ $Var(\hat{\theta}) \approx \frac{1}{\hat{I}_n(\hat{\theta})} \approx \frac{1}{J_n(\hat{\theta})}$
+\\ (Observed Info is often preferred in practice, Efron \& Hinkley).
+
+\distname{Chi-Square Test for Independence ($Q_{ab-1}$):}
+For contingency table with $a$ rows and $b$ cols.
+\\ $H_0: P(A_i \cap B_j) = P(A_i)P(B_j)$ (Independence).
+\\[-0.2cm]
+\[ Q_{ab-1} = \sum_{j=1}^{b}\sum_{i=1}^{a}\frac{(X_{ij}-n\hat{p}_{i.}\hat{p}_{.j})^{2}}{n\hat{p}_{i.}\hat{p}_{.j}} \xrightarrow{D} \chi^2_{(a-1)(b-1)} \]
+\\[-0.4cm]
+\textbf{Estimates:}
+\\ $\hat{p}_{i.} = \frac{X_{i.}}{n} = \frac{\sum_{j=1}^b X_{ij}}{n}$ (Row marginal prob)
+\\ $\hat{p}_{.j} = \frac{X_{.j}}{n} = \frac{\sum_{i=1}^a X_{ij}}{n}$ (Col marginal prob)
+\\ \textbf{Note:} $n\hat{p}_{i.}\hat{p}_{.j}$ is the Expected Frequency ($E_{ij}$).
+% =========================================
+% 9. Slutsky's Theorem Proof
+% =========================================
+\sectiontitle{9. Proof of Slutsky's Theorem}
+
+\textbf{Statement:} If $X_n \xrightarrow{D} X$ and $Y_n \xrightarrow{P} c$, then $X_n + Y_n \xrightarrow{D} X+c$.
+
+\textbf{Proof:} Let $F$ be the CDF of $X$. We show $F_{X_n+Y_n}(z) \to F_X(z-c)$. For any $\epsilon > 0$:
+
+\textbf{1. Upper Bound:}
+\\ Decompose $\{X_n + Y_n \le z\}$:
+\\ $P(X_n + Y_n \le z) \le P(X_n + Y_n \le z, |Y_n - c| < \epsilon) + P(|Y_n - c| \ge \epsilon)$
+\\ Note that if $|Y_n - c| < \epsilon$, then $Y_n > c - \epsilon$.
+\\ $\implies X_n \le z - Y_n \le z - c + \epsilon$.
+\\ Thus, $P(X_n + Y_n \le z) \le P(X_n \le z - c + \epsilon) + P(|Y_n - c| \ge \epsilon)$.
+\\ Taking $\limsup_{n \to \infty}$ (using $Y_n \xrightarrow{P} c$):
+\\ $\limsup P(X_n + Y_n \le z) \le F_X(z - c + \epsilon)$.
+
+\textbf{2. Lower Bound:}
+\\ Consider event $\{X_n \le z - c - \epsilon\}$:
+\\ $P(X_n \le z - c - \epsilon) \le P(X_n + Y_n \le z) + P(|Y_n - c| \ge \epsilon)$.
+\\ Taking $\liminf_{n \to \infty}$:
+\\ $F_X(z - c - \epsilon) \le \liminf P(X_n + Y_n \le z)$.
+
+\textbf{3. Conclusion:}
+\\ Let $\epsilon \downarrow 0$. Since $z-c$ is a continuity point of $F_X$:
+\\ $F_X(z-c) \le \liminf \le \limsup \le F_X(z-c)$.
+\\ $\therefore X_n + Y_n \xrightarrow{D} X+c$. \hfill $\square$
+
+\sectiontitle{10. Boundedness \& Little-o (Thm 5.2.7, 5.2.8)}
+
+\textbf{Def:} Sequence $X_n$ is \textit{bounded in probability} ($X_n = O_p(1)$) if $\forall \epsilon > 0, \exists B_\epsilon, N_\epsilon$ such that $P(|X_n| \le B_\epsilon) \ge 1 - \epsilon$ for all $n \ge N_\epsilon$.
+\\ (Note: $X_n \xrightarrow{D} X \implies X_n$ is bounded in prob.)
+
+\distname{Theorem 5.2.7 (Product with $\xrightarrow{P} 0$):}
+If $X_n$ is bounded in probability and $Y_n \xrightarrow{P} 0$, then $X_n Y_n \xrightarrow{P} 0$.
+\\ \textbf{Proof:} For any $\epsilon > 0$, choose $B$ s.t. $P(|X_n| > B) < \epsilon/2$.
+\\ $P(|X_n Y_n| \ge \epsilon) \le P(|X_n Y_n| \ge \epsilon, |X_n| \le B) + P(|X_n| > B)$
+\\ $\le P(B |Y_n| \ge \epsilon) + \epsilon/2 = P(|Y_n| \ge \epsilon/B) + \epsilon/2$.
+\\ Since $Y_n \xrightarrow{P} 0$, the first term $\to 0$. Thus $\limsup P(\dots) \le \epsilon/2$. \hfill $\square$
+
+\distname{Theorem 5.2.8 ($o_p$ Convergence):}
+If $Y_n$ is bounded in probability and $X_n = o_p(Y_n)$ (i.e., $X_n/Y_n \xrightarrow{P} 0$), then $X_n \xrightarrow{P} 0$.
+\\ \textbf{Proof:} Let $\epsilon > 0$. Choose $B$ s.t. $P(|Y_n| \le B) \ge 1 - \epsilon/2$.
+\\ $P(|X_n| \ge \epsilon) = P(|\frac{X_n}{Y_n} \cdot Y_n| \ge \epsilon)$
+\\ $\le P(|\frac{X_n}{Y_n}| \cdot B \ge \epsilon) + P(|Y_n| > B)$
+\\ $= P(|\frac{X_n}{Y_n}| \ge \frac{\epsilon}{B}) + \epsilon/2$.
+\\ Since $\frac{X_n}{Y_n} \xrightarrow{P} 0$, the first term $\to 0$. \hfill $\square$
+\end{multicols*}
+\end{document}
